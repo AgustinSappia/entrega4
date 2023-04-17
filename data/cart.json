@@ -1,0 +1,24 @@
+[
+	{
+		"products": [
+			{
+				"id": "2",
+				"cantidad": 2
+			}
+		],
+		"id": "ml5o3e2qeos"
+	},
+	{
+		"products": [
+			{
+				"id": "0",
+				"cantidad": 7
+			},
+			{
+				"id": "2",
+				"cantidad": 9
+			}
+		],
+		"id": "ekg7q5ehhrc"
+	}
+]

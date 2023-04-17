@@ -1,0 +1,102 @@
+[
+  {
+    "title": "producto 1",
+    "description": "objeto de prueba",
+    "price": 123,
+    "thumbnail": "sin imagen",
+    "code": "001",
+    "stock": 599,
+    "id": "0"
+  },
+  {
+    "title": "producto 2",
+    "description": "objeto de prueba",
+    "price": 123,
+    "thumbnail": "sin imagen",
+    "code": "002",
+    "stock": 599,
+    "id": "1"
+  },
+  {
+    "title": "producto 3",
+    "description": "objeto de prueba",
+    "price": 123,
+    "thumbnail": "sin imagen",
+    "code": "003",
+    "stock": 599,
+    "id": "2"
+  },
+  {
+    "title": "producto 4",
+    "description": "objeto de prueba",
+    "price": 123,
+    "thumbnail": "sin imagen",
+    "code": "004",
+    "stock": 599,
+    "id": "3"
+  },
+  {
+    "title": "producto 5",
+    "description": "objeto de prueba",
+    "price": 123,
+    "thumbnail": "sin imagen",
+    "code": "005",
+    "stock": 599,
+    "id": "4"
+  },
+  {
+    "title": "producto 6",
+    "description": "objeto de prueba",
+    "price": 123,
+    "thumbnail": "sin imagen",
+    "code": "006",
+    "stock": 599,
+    "id": "5"
+  },
+  {
+    "title": "producto 7",
+    "description": "objeto de prueba",
+    "price": 123,
+    "thumbnail": "sin imagen",
+    "code": "007",
+    "stock": 599,
+    "id": "6"
+  },
+  {
+    "title": "producto 8",
+    "description": "objeto de prueba",
+    "price": 123,
+    "thumbnail": "sin imagen",
+    "code": "008",
+    "stock": 599,
+    "id": "7"
+  },
+  {
+    "title": "producto 9",
+    "description": "objeto de prueba",
+    "price": 123,
+    "thumbnail": "sin imagen",
+    "code": "009",
+    "stock": 599,
+    "id": "8"
+  },
+  {
+    "title": "producto 10",
+    "description": "objeto de prueba",
+    "price": 123,
+    "thumbnail": "sin imagen",
+    "code": "0010",
+    "stock": 599,
+    "id": "9"
+  },
+  {
+    "title": "producto 999",
+    "description": "objeto de prueba",
+    "price": 123,
+    "thumbnail": "sin imagen",
+    "code": "46",
+    "stock": 599,
+    "id": "m8stfb2st8e",
+    "status": true
+  }
+]
