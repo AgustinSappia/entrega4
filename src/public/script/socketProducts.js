@@ -5,7 +5,6 @@ const socketProduct =async (io) =>{
     try{
         let productos = await prodManag.getProduct()
         io.on("connection",socket =>{
-            console.log("holasas")
             socket.emit("productos",productos)
             socket.on("addProduct",async data =>{
                 try{
