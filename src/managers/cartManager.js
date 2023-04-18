@@ -52,23 +52,29 @@ async searchCartById(id){
 }
 
 async addProduct(product,cart){
-    let carts = await this.GetCarts()
-    let index = carts.findIndex(carrito => carrito.id === cart.id)
-    let carritoOriginal =  carts[index];
-    let productosCarrito = carritoOriginal.products
-    let indexProducto = productosCarrito.findIndex(produto => produto.id === product.id)
-    if(indexProducto>=0){
+    try{
 
+        let carts = await this.GetCarts()
+        let index = carts.findIndex(carrito => carrito.id === cart.id)
+        let carritoOriginal =  carts[index];
+        let productosCarrito = carritoOriginal.products
         let indexProducto = productosCarrito.findIndex(produto => produto.id === product.id)
-        productosCarrito[indexProducto].cantidad++
+        if(indexProducto>=0){
+            
+            let indexProducto = productosCarrito.findIndex(produto => produto.id === product.id)
+            productosCarrito[indexProducto].cantidad++
+        }
+        else{
+            productosCarrito.push({id:product.id,cantidad:1})
+        }
+        
+        let cartsJson= JSON.stringify(carts,"utf-8","\t")
+        await fs.promises.writeFile(this.path,cartsJson)
+        return carts[index]
     }
-    else{
-        productosCarrito.push({id:product.id,cantidad:1})
+    catch(error){
+        console.log(error)
     }
-
-    let cartsJson= JSON.stringify(carts,"utf-8","\t")
-    await fs.promises.writeFile(this.path,cartsJson)
-    return carts[index]
 }
 
 

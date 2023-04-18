@@ -15,6 +15,9 @@ class ProductManager{
     async addProduct(product){
       try{
         let products = await this.getProduct()
+        if (!product.thumbnail){
+          product.thumbnail = "no image"
+        }
         if (!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock) {
           return "Error: todos los campos son obligatorios";
         }
@@ -25,7 +28,7 @@ class ProductManager{
         
         const newProduct = {
           ...product,
-          id: this.generarIdUnico(),
+          id: product.code+this.generarIdUnico(),
           status: true
         };
         this.products.push(newProduct);
@@ -66,17 +69,23 @@ class ProductManager{
 
 
 async updateProduct(id,update){
-  let producto = await this.getProductById(id)
+  try{
 
-
-  producto.title = update.title || producto.title
-  producto.description = update.description || producto.description
-  producto.price = update.price || producto.price
-  producto.thumbnail = update.thumbnail || producto.thumbnail
-  producto.stock = update.stock || producto.stock
-  producto.code= update.code || producto.code
-  await fs.promises.writeFile(this.path, JSON.stringify(this.products,'utf-8','\t'))
-  return 'Producto Actualizado'
+    let producto = await this.getProductById(id)
+    
+    
+    producto.title = update.title || producto.title
+    producto.description = update.description || producto.description
+    producto.price = update.price || producto.price
+    producto.thumbnail = update.thumbnail || producto.thumbnail
+    producto.stock = update.stock || producto.stock
+    producto.code= update.code || producto.code
+    await fs.promises.writeFile(this.path, JSON.stringify(this.products,'utf-8','\t'))
+    return 'Producto Actualizado'
+  }
+  catch(error){
+    console.log(error)
+  }
   
 }
 

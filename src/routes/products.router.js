@@ -2,7 +2,7 @@ const {Router} = require("express")
 
 const router = Router()
 
-const ProductManager = require("../../productManager") 
+const ProductManager = require("../managers/productManager") 
 const prodManager = new ProductManager("./data/products.json")
 
 
@@ -10,12 +10,19 @@ const prodManager = new ProductManager("./data/products.json")
 router.get("/",async(request,response)=>{
     try{
         let {limit} = request.query     // no olvidar del destructury 
+        let esNumero = isNaN(limit)
         let productos = await prodManager.getProduct()
-        if(!limit){
+        if(!limit ){
             response.send(productos).status(200)
         }
         else{
-            response.send(productos.slice(0,limit)).status(200)
+            if(esNumero){
+                console.log("el limit no es un numero")
+                response.send(productos).status(200)
+            }
+            else{
+                response.send(productos.slice(0,limit)).status(200)
+            }
         }
     }
     catch(error){

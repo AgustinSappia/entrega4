@@ -11,7 +11,7 @@ let puerto = 8080
 
 const httpServer = app.listen(puerto,()=>{
     
-    console.log("escuchando: "+ puerto)
+    console.log(`escuchando puerto: ${puerto}`)
 })
 
 const socketServer = new Server(httpServer)
