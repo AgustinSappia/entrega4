@@ -40,6 +40,10 @@ router.get("/productosSocket",async (req,res)=>{
 
 })
 
+router.get("/chatSocket", (req,res)=>{
+    res.render("chatSocket")
+})
+
 
 
 module.exports = router

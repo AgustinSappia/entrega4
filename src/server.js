@@ -22,6 +22,7 @@ const socketServer = new Server(httpServer)
 //hbs------------------------
 const handlebars= require("express-handlebars");
 const { socketProduct } = require("./public/script/socketProducts")
+const { chatSocket } = require("./public/script/chatSocket")
 app.engine("handlebars", handlebars.engine())
 app.set("views", __dirname+"/views")
 app.set("view engine", "handlebars")
@@ -48,6 +49,7 @@ socketServer.on("connection", socket =>{
     console.log("nuevo usuario conectado")
 })
 socketProduct(socketServer)
+chatSocket(socketServer)
 
 app.use("/products",routerProducts)
 app.use("/cart",routerCart)
