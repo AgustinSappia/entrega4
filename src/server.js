@@ -16,7 +16,10 @@ const httpServer = app.listen(puerto,()=>{
 
 const socketServer = new Server(httpServer)
 
-
+//mongoo prueba
+const objetConfigs = require("./config/objetConfigs")
+objetConfigs.connectDb()
+const {userModel} = require("./models/user.model")
 
 
 //hbs------------------------
@@ -36,13 +39,31 @@ app.use(express.static(__dirname+"/public"))
 
 
 
-app.get("/",async(request,response)=>{
+app.get("/hola",async(request,response)=>{
     try{
         response.send("buenas")
+        let usuarios = await userModel.find()//prueba de mongoo 
+        console.log(usuarios)   //prueba de mongoo 
     }
     catch(error){
         console.log(error)
     }
+})
+
+app.post("/hola" ,async(req,res)=>{
+try{
+let user= req.body
+const newUser ={
+    first_name: user.name,
+    last_name: user.lastName,
+    email: user.email
+}
+let result = await userModel.create(newUser)
+
+}
+catch(error){
+    console.log(error)
+}
 })
 
 socketServer.on("connection", socket =>{
