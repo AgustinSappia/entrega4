@@ -2,10 +2,10 @@ const {Router} = require("express")
 
 const router = Router()
 
-const CartManager = require("../managers/cartManager") 
+const CartManager = require("../managers/cartManagerMongoose") 
 const cartManager = new CartManager("./data/cart.json")
 
-const ProductManager = require("../managers/productManager")
+const ProductManager = require("../managers/productManagerMongoose")
 const productManager = new ProductManager("./data/products.json")
 
 router.post("/",async(req,res)=>{
@@ -19,15 +19,16 @@ catch(error){
 
 router.post("/:cid/products/:pid",async(req,res)=>{
     try{
-
+        
         let{cid,pid} = req.params 
         let producto = await productManager.getProductById(pid);
+
         let carrito = await cartManager.searchCartById(cid);
         if(carrito==false || producto== false){
             res.send("ingrese datos validos").status(400)
         }
         else{
-            res.send(await cartManager.addProduct(producto,carrito)).status(200)
+            res.send(await cartManager.addProduct(cid,pid)).status(200)
         }
     }
     catch(error){

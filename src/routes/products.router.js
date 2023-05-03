@@ -2,7 +2,7 @@ const {Router} = require("express")
 
 const router = Router()
 
-const ProductManager = require("../managers/productManager") 
+const ProductManager = require("../managers/productManagerMongoose") 
 const prodManager = new ProductManager("./data/products.json")
 
 
@@ -43,7 +43,8 @@ router.get("/:pid",async(request,response)=>{
 
     }
     catch(error){ 
-        console.log(error).status(500)
+        response.send("no existe el producto").status(500)
+        return error
     }
 })
 //POST  http:localhost:8080/products
@@ -56,7 +57,7 @@ router.post("/", async (req,res)=>{    //
         res.status(200).send({newProduct})
     }
     catch(error){
-        response.status(400).send({status:"error",mensaje:"algo salio mal"})
+        res.status(400).send({status:"error",mensaje:"algo salio mal"})
         console.log(error)
     }
 })
@@ -69,7 +70,11 @@ router.put("/:pid",async(req,res)=>{
 
         let {pid} = req.params
         modif = req.body
-        res.status(200).send( await prodManager.updateProduct(pid,modif))
+        let result = await prodManager.updateProduct(pid,modif)
+        res.status(200).send({
+            status:"sucess",
+            payload: result
+        })
     }
     catch(error){
         res.status(500).send(error)

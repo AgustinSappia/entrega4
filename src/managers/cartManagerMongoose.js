@@ -1,37 +1,24 @@
 let carts=[]
-let products=[]
 const fs = require("fs")
+const {cartsModel} = require("../models/carts.model")
+const ProductManager = require("../managers/productManagerMongoose")
+const productManager = new ProductManager("./data/products.json")
 class CartManagerMongo{
-    constructor(path){ 
-        this.path = path
-        this.products= products
-        this.carts = carts
-}
-genId = () => { 
-    return Math.random().toString(30).substring(2);           
-} 
+ 
 
 async GetCarts(){
     try{
-        const data = await fs.promises.readFile(this.path, 'utf-8').catch(()=>{
-            fs.promises.writeFile(this.path,"[]");
-            return "[]"});
-            return await JSON.parse(data)}
+            return await cartsModel.find()
+        }
     catch(error){
         console.log(error)
      }
 }
 
-async createCart(products){
+async createCart(){
     try{
-        let carts = await this.GetCarts()
-        carts.push({
-           products:products||this.products,
-           id: this.genId()
-        })
-        let cartsJson = JSON.stringify(carts,"utf-8","\t")
-        await fs.promises.writeFile(this.path,cartsJson)
-        return cartsJson
+        console.log("carrito creando")
+        return await cartsModel.create({products:[]})
     }
     catch(error){ 
     console.log(error)
@@ -40,10 +27,7 @@ async createCart(products){
 
 async searchCartById(id){
     try{
-        let carritos = await this.GetCarts()
-        let carrito = await carritos.find(cart=> cart.id == id)
-        if(!carrito) return false
-        return carrito
+        return await cartsModel.findOne({_id:id})
     }
     catch(error){
         console.log("el carrito no existe"+error)
@@ -51,26 +35,32 @@ async searchCartById(id){
     }
 }
 
-async addProduct(product,cart){
+async addProduct(cid,pid){
     try{
 
-        let carts = await this.GetCarts()
-        let index = carts.findIndex(carrito => carrito.id === cart.id)
-        let carritoOriginal =  carts[index];
+        let carritoOriginal = await cartsModel.findOne({_id:cid})
+        let product = await productManager.getProductById(pid)
+
+        
+ 
         let productosCarrito = carritoOriginal.products
-        let indexProducto = productosCarrito.findIndex(produto => produto.id === product.id)
+        let indexProducto = productosCarrito.findIndex(produto => produto._id === pid)
+ 
+        console.log(indexProducto)
+
         if(indexProducto>=0){
             
-            let indexProducto = productosCarrito.findIndex(produto => produto.id === product.id)
+            let indexProducto = productosCarrito.findIndex(produto => produto._id === pid)
             productosCarrito[indexProducto].cantidad++
         }
         else{
-            productosCarrito.push({id:product.id,cantidad:1})
+            productosCarrito.push({_id:product._id,cantidad:1})
         }
         
-        let cartsJson= JSON.stringify(carts,"utf-8","\t")
-        await fs.promises.writeFile(this.path,cartsJson)
-        return carts[index]
+        let cartRemplazar={
+                products: productosCarrito
+        }
+        return cartsModel.replaceOne({_id:cid},cartRemplazar)
     }
     catch(error){
         console.log(error)
