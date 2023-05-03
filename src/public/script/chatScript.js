@@ -1,3 +1,4 @@
+
 const socket = io()
 console.log("este es el script")
 let user
@@ -29,10 +30,9 @@ chatBox.addEventListener("keyup",evt =>{
 socket.on("messageLogs",data =>{
     let log = document.getElementById("messageLogs")
     let message = ""
-    data.forEach(element => {
+    data.forEach(async element => {
         message+= `<li>${element.user}:${element.message}</li>`
     });
-
     log.innerHTML = message
 })
 
