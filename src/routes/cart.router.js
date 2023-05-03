@@ -2,11 +2,11 @@ const {Router} = require("express")
 
 const router = Router()
 
-const CartManager = require("../managers/cartManagerMongoose") 
-const cartManager = new CartManager("./data/cart.json")
+const CartManager = require("../dao/managers/cartManagerMongoose") 
+const cartManager = new CartManager()
 
-const ProductManager = require("../managers/productManagerMongoose")
-const productManager = new ProductManager("./data/products.json")
+const ProductManager = require("../dao/managers/productManagerMongoose")
+const productManager = new ProductManager()
 
 router.post("/",async(req,res)=>{
 try{

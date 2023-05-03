@@ -1,8 +1,8 @@
 let carts=[]
 const fs = require("fs")
 const {cartsModel} = require("../models/carts.model")
-const ProductManager = require("../managers/productManagerMongoose")
-const productManager = new ProductManager("./data/products.json")
+const ProductManager = require("./productManagerMongoose")
+const productManager = new ProductManager()
 class CartManagerMongo{
  
 

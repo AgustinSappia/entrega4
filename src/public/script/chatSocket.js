@@ -1,4 +1,4 @@
-const { chatsModel } = require("../../models/chats.models")
+const { chatsModel } = require("../../dao/models/chats.models")
 
 
 let messages=[]

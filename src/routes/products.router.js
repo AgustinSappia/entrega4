@@ -2,8 +2,8 @@ const {Router} = require("express")
 
 const router = Router()
 
-const ProductManager = require("../managers/productManagerMongoose") 
-const prodManager = new ProductManager("./data/products.json")
+const ProductManager = require("../dao/managers/productManagerMongoose") 
+const prodManager = new ProductManager()
 
 
 

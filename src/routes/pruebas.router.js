@@ -1,7 +1,7 @@
 const {Router} = require("express")
 const router = Router()
 const ProductManager = require("../managers/productManager");
-let prodManager=new ProductManager("./data/products.json")
+let prodManager=new ProductManager()
 
 router.get("/aleatorio", async(req,res)=>{
     try{

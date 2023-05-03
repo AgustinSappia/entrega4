@@ -22,7 +22,7 @@ class ProductManagerMongo{
           ...product,
           status: true
         };
-        return productsModel.create(newProduct)
+        return await productsModel.create(newProduct)
       }
       catch(error){
         return new Error(error)

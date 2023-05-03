@@ -19,7 +19,7 @@ const socketServer = new Server(httpServer)
 //mongoo prueba
 const objetConfigs = require("./config/objetConfigs")
 objetConfigs.connectDb()
-const {userModel} = require("./models/user.model")
+const {userModel} = require("./dao/models/user.model")
 
 
 //hbs------------------------

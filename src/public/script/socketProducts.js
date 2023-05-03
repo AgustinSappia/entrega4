@@ -1,5 +1,5 @@
-const productManager = require("../../managers/productManager")
-const prodManag = new productManager("./data/products.json")
+const productManager = require("../../dao/managers/productManagerMongoose")
+const prodManag = new productManager()
 
 const socketProduct =async (io) =>{
     try{
