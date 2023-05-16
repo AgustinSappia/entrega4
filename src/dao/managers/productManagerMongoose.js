@@ -39,6 +39,20 @@ class ProductManagerMongo{
         return new Error(error)
     }
 }
+async getProductPaginate(pages,limite,filtro,orden){
+  try{
+    console.log(filtro)
+    if(!filtro){
+      return test.paginate({},{limit: limite, page:pages,lean:true})   // configuracion del paginate -- el lean es para que no tire error de propiedad
+    }
+    else{
+      return await productsModel.paginate(filtro,{limit: limite, page:pages,sort:orden, lean: true})
+    }
+}
+catch (error){
+    return new Error(error)
+}
+}
  async getProductById(id){
   try{
     return productsModel.findOne({_id:id})

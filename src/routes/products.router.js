@@ -9,20 +9,44 @@ const prodManager = new ProductManager()
 
 router.get("/",async(request,response)=>{
     try{
-        let {limit} = request.query     // no olvidar del destructury 
+        let {limit=3,page=1,query,data,sort} = request.query    
+        let filtro = {}     //creamos un filtro usando los query params de query y data
+        let orden ={price:sort}
+        console.log(limit,page,query,data,sort)
+
+        if (query||data){
+            filtro[query] = data
+        }
         let esNumero = isNaN(limit)
-        let productos = await prodManager.getProduct()
-        if(!limit ){
-            response.send(productos).status(200)
+        let productos = await prodManager.getProductPaginate(page,limit,filtro,orden)
+        const {docs,hasPrevPage,hasNextPage,prevPage,nextPage,totalPages} = productos
+        let nextLink = "/products?page="+nextPage
+        let prevLink ="/products?page="+prevPage
+
+        if(!esNumero){
+            limit=2  //si no ingresa un limite valido lo dejo en 10 que es el por defecto
+        }
+        if(!docs || docs.length === 0 ){
+            response.render("productos",{exist:false})
         }
         else{
-            if(esNumero){
-                console.log("el limit no es un numero")
-                response.send(productos).status(200)
-            }
-            else{
-                response.send(productos.slice(0,limit)).status(200)
-            }
+            response.render
+                ("productos",{
+                    status:"success",
+                    payload:docs,
+                    exist: true,
+                    totalPages,
+                    hasPrevPage,
+                    hasNextPage,
+                    prevPage: !prevPage? "no exist":prevPage,
+                    nextPage,
+                    page,
+                    nextLink: !hasNextPage? "no found" : nextLink ,
+                    prevLink: !hasPrevPage? "no exist" : prevLink
+
+                 })
+        
+            
         }
     }
     catch(error){

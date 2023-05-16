@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-
+const mongoosePaginate = require("mongoose-paginate-v2")
 const collection = "products"
 
-const productsSchema= new mongoose.Schema({
+const productsSchema= new mongoose.Schema({ 
 
     title: String,
     description: String,
@@ -12,6 +12,8 @@ const productsSchema= new mongoose.Schema({
     stock: Number,
     status: Boolean
 })
+
+productsSchema.plugin(mongoosePaginate)     // envio paginate
 
 const productsModel = mongoose.model(collection,productsSchema)
 

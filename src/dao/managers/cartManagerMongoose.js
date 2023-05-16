@@ -27,46 +27,103 @@ async createCart(){
 
 async searchCartById(id){
     try{
-        return await cartsModel.findOne({_id:id})
+       let cart= await cartsModel.findOne({_id:id}).lean().populate("products.product")
+       if(!cart){
+        return console.log("el carrito no existe")
+       }
+       else{
+           return cart
+       }
     }
     catch(error){
-        console.log("el carrito no existe"+error)
-        return false
+        return error
     }
 }
 
-async addProduct(cid,pid){
+async addProduct(cid,pid,cantidadAgregado){
     try{
-
-        let carritoOriginal = await cartsModel.findOne({_id:cid})
-        let product = await productManager.getProductById(pid)
-
-        
- 
-        let productosCarrito = carritoOriginal.products
-        let indexProducto = productosCarrito.findIndex(produto => produto._id === pid)
- 
-        console.log(indexProducto)
-
-        if(indexProducto>=0){
-            
-            let indexProducto = productosCarrito.findIndex(produto => produto._id === pid)
-            productosCarrito[indexProducto].cantidad++
+        if(!cid||!pid){
+            return "no ingreso datos correctos"
+        }
+        let carrito = await cartsModel.findOne({_id:cid})
+        let productos= carrito.products
+        let index = productos.findIndex(objeto =>objeto.product == pid)
+        if(index>=0){
+            if(!cantidadAgregado){
+                productos[index].cantidad++
+            }
+            else{
+                productos[index].cantidad = productos[index].cantidad + cantidadAgregado
+            }
         }
         else{
-            productosCarrito.push({_id:product._id,cantidad:1})
+            if(!cantidadAgregado){
+                productos.push({product: pid ,cantidad:1})
+            }
+            else{
+                productos.push({product: pid ,cantidad:cantidadAgregado})
+            }
         }
-        
-        let cartRemplazar={
-                products: productosCarrito
-        }
-        return cartsModel.replaceOne({_id:cid},cartRemplazar)
+        let resp= await cartsModel.updateOne({_id:cid },carrito) 
+        return resp
+
+
+
     }
     catch(error){
         console.log(error)
     }
 }
 
+
+async putProduct(cid,pid,update){
+    try{
+        let carrito = await cartsModel.findOne({_id:cid})
+        console.log(carrito)
+         let productos= carrito.products
+         let index = productos.findIndex(objeto =>objeto.product == pid)
+        console.log(index)
+        const {cantidad}= update
+        console.log(cantidad)
+
+         if(index>=0){
+             productos[index].cantidad=cantidad
+            return await cartsModel.updateOne({_id:cid},carrito)
+         }
+         else{
+            return"no se encontro el producto"
+         }
+    }
+    catch(error){
+        console.log(error)
+        return error
+    }
+}
+
+
+async deleteProduct(cid,pid){
+    try{
+        if(!cid||!pid){
+            return "no ingreso datos correctos"
+        }
+        let carrito = await cartsModel.findOne({_id:cid})
+        let productos= carrito.products
+        let index = productos.findIndex(objeto =>objeto.product == pid)
+        console.log(index)
+        if(index>=0){
+            productos.splice(index,1)
+            console.log(productos)
+        }
+        else{
+            return "el producto no existe"
+        }
+        let resp= await cartsModel.updateOne({_id:cid },carrito) 
+        return resp
+    }
+    catch(error){
+        return error
+    }
+}
 
 
 }

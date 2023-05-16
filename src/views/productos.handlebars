@@ -1,0 +1,47 @@
+<div>
+    {{#if exist}}
+
+        {{#each payload}}
+            <li>
+                <strong>Nombre: </strong>{{this.title}}-
+                <strong>id: </strong>{{this._id}}
+                <strong>price:</strong>{{this.price}}
+                <strong>stock:</strong>{{this.stock}}
+                <button id="postProducto">agregar al carrito</button>
+            </li>
+        {{/each}}
+        {{#if hasPrevPage}}
+        <a href="/products?page={{prevPage}}"><button>Atras</button></a>
+        {{/if}}
+        {{#if hasNextPage}}
+        <a href="/products?page={{nextPage}}"><button>Siguiente</button></a>
+        {{/if}}
+    {{else}}
+    <h1>No hay productos</h1>
+    {{/if}}
+</div>
+<hr>
+<div>
+    <h2>info de envio</h2>
+    <li>status: {{status}}</li>
+    <li>totalPages: {{totalPages}}</li>
+    <li>hasPrevPage: {{hasPrevPage}}</li>
+    <li>hasNextPage: {{hasNextPage}}</li>
+    <li>prevPage: {{prevPage}}</li>
+    <li>nextPage: {{nextPage}}</li>
+    <LI>page: {{page}}</LI>
+    <li>nextLink: {{nextLink}}</li>
+    <li>prevLink: {{prevLink}}</li>
+</div>
+
+<script>
+document.getElementById("postProducto").addEventListener("click", async()=>{
+ try{
+    await fetch("http://localhost:8080/cart/645ff5f7d43ade4e65d5993e/products/")
+ }
+ catch{
+
+ } }
+)
+
+</script>
