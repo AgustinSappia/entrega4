@@ -6,6 +6,7 @@ let routerProducts = require("./routes/products.router")
 let routerCart = require("./routes/cart.router")
 let pruebasRouter = require("./routes/pruebas.router")
 const {Server}= require("socket.io")
+const cookieParser = require("cookie-parser")
 let app = express()
 let puerto = 8080
 
@@ -34,6 +35,7 @@ app.set("view engine", "handlebars")
 app.use(express.json()) //body-parser implementa una libreria nativa que antes era externa
 app.use(express.urlencoded({extended: true})) //permite recibir url complejas en express
 app.use(express.static(__dirname+"/public"))
+app.use(cookieParser())
 
 //GET
 
@@ -65,6 +67,16 @@ catch(error){
     console.log(error)
 }
 })
+
+
+app.get("/cookie", async(req,res)=>{
+
+    res.cookie("CookieHacker","Ten mucho cuidado forastero",{maxAge:10000}).send({msj:"Probamos cookies",cookieCreada:await req.cookies})
+
+})
+
+
+
 
 socketServer.on("connection", socket =>{
     console.log("nuevo usuario conectado")

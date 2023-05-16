@@ -12,7 +12,6 @@ router.get("/",async(request,response)=>{
         let {limit=3,page=1,query,data,sort} = request.query    
         let filtro = {}     //creamos un filtro usando los query params de query y data
         let orden ={price:sort}
-        console.log(limit,page,query,data,sort)
 
         if (query||data){
             filtro[query] = data
