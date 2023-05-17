@@ -7,7 +7,7 @@
                 <strong>id: </strong>{{this._id}}
                 <strong>price:</strong>{{this.price}}
                 <strong>stock:</strong>{{this.stock}}
-                <button id="postProducto">agregar al carrito</button>
+                <button class="postProducto" data-id="{{this.id}}">agregar al carrito</button>
             </li>
         {{/each}}
         {{#if hasPrevPage}}
@@ -35,13 +35,32 @@
 </div>
 
 <script>
-document.getElementById("postProducto").addEventListener("click", async()=>{
- try{
-    await fetch("http://localhost:8080/cart/645ff5f7d43ade4e65d5993e/products/")
- }
- catch{
 
- } }
-)
+document.addEventListener("DOMContentLoaded",function(){
+    let botones = document.getElementsByClassName("postProducto")
+    for(let i = 0; i < botones.length; i++){
+        botones[i].addEventListener("click", function(){
+            let objetoId = this.getAttribute("data-id")
+            enviarAlCarrito(objetoId)
+        })
+    }
+})
+
+function enviarAlCarrito(objetoId){
+    console.log(objetoId)
+    fetch(`/cart/645ff5f7d43ade4e65d5993e/products/${objetoId}`,{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({objetoId: objetoId})
+    })
+    .then(function(response){
+        console.log(response)
+    })
+    .catch(function(error){
+        console.error("Error:", error)
+    })
+}
 
 </script>

@@ -17,6 +17,7 @@ router.get("/",async(request,response)=>{
             filtro[query] = data
         }
         let esNumero = isNaN(limit)
+        
         let productos = await prodManager.getProductPaginate(page,limit,filtro,orden)
         const {docs,hasPrevPage,hasNextPage,prevPage,nextPage,totalPages} = productos
         let nextLink = "/products?page="+nextPage
