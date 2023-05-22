@@ -79,12 +79,12 @@ async addProduct(cid,pid,cantidadAgregado){
 async putProduct(cid,pid,update){
     try{
         let carrito = await cartsModel.findOne({_id:cid})
-        console.log(carrito)
+
          let productos= carrito.products
          let index = productos.findIndex(objeto =>objeto.product == pid)
-        console.log(index)
+
         const {cantidad}= update
-        console.log(cantidad)
+
 
          if(index>=0){
              productos[index].cantidad=cantidad
@@ -109,7 +109,7 @@ async deleteProduct(cid,pid){
         let carrito = await cartsModel.findOne({_id:cid})
         let productos= carrito.products
         let index = productos.findIndex(objeto =>objeto.product == pid)
-        console.log(index)
+
         if(index>=0){
             productos.splice(index,1)
             console.log(productos)

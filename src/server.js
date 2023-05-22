@@ -45,7 +45,7 @@ app.use(session({
     store:MongoStore.create({
         mongoUrl:"mongodb+srv://agustinsappia12:Dni42206141@cluster0.uvoardd.mongodb.net/?retryWrites=true&w=majority",
         mongoOptions:{useNewUrlParser:true, useUnifiedTopology:true},
-        ttl:15
+        ttl:300
     }),
     secret:"SsEeCcRrEeTtCcOoDdEe",
     resave:false,
@@ -55,7 +55,20 @@ app.use(session({
 
 
 
-
+app.get("/",async(req,res)=>{
+    try{
+        console.log("inicio")
+        if(!req.session.user){
+            res.redirect("/session/login3")
+        }
+        else{
+            res.redirect("/products")
+        }
+    }
+    catch(error){
+        console.log(error)
+    }
+})
 
 
 

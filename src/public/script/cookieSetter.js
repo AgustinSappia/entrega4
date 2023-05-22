@@ -22,3 +22,4 @@ form.addEventListener("submit",(e)=> {
  const getCookies = ()=>{
     console.log(document.cookie)
  }
+ 

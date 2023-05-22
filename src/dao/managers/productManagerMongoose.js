@@ -41,7 +41,7 @@ class ProductManagerMongo{
 }
 async getProductPaginate(pages,limite,filtro,orden){
   try{
-    console.log(filtro)
+
     if(!filtro){
       return test.paginate({},{limit: limite, page:pages,lean:true})   // configuracion del paginate -- el lean es para que no tire error de propiedad
     }

@@ -5,7 +5,18 @@ const mongoose = require("mongoose");
 const collection = "users"
 
 const userSchema = new mongoose.Schema({
-        first_name: String,
+
+        username: {
+            type: String,
+            required:true,
+            unique:true
+        },
+        
+        first_name: {
+            type: String,
+            required:true
+        },
+
         last_name:{
             type: String,
             required: true
@@ -14,7 +25,9 @@ const userSchema = new mongoose.Schema({
             type:String,
             required: true,
             unique: true
-        }
+        },
+        password: String,
+        rol: String
     })
 
     const userModel = mongoose.model(collection,userSchema)

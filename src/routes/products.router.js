@@ -22,6 +22,7 @@ router.get("/",async(request,response)=>{
         const {docs,hasPrevPage,hasNextPage,prevPage,nextPage,totalPages} = productos
         let nextLink = "/products?page="+nextPage
         let prevLink ="/products?page="+prevPage
+        let session = request.session 
 
         if(!esNumero){
             limit=2  //si no ingresa un limite valido lo dejo en 10 que es el por defecto
@@ -42,8 +43,8 @@ router.get("/",async(request,response)=>{
                     nextPage,
                     page,
                     nextLink: !hasNextPage? "no found" : nextLink ,
-                    prevLink: !hasPrevPage? "no exist" : prevLink
-
+                    prevLink: !hasPrevPage? "no exist" : prevLink,
+                    session
                  })
         
             
