@@ -20,7 +20,6 @@ formularioProductos.reset()
 
 
 socket.on("productos",data =>{
-    console.log(data)
     let listaProd = document.getElementById("productosId")
     let liProducto =""
     data.forEach(producto => {
@@ -28,6 +27,5 @@ socket.on("productos",data =>{
 
         
     });
-    console.log(liProducto)
     listaProd.innerHTML = liProducto
 })

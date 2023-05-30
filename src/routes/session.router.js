@@ -78,7 +78,7 @@ router.post("/login3",async(req,res)=>{
 
         if(!email||!password) return res.send({status:"error",error:"hay campos faltantes"})
         const search = await userModel.findOne({email})
-        console.log(search)
+        
 
         if (!search) return res.send({status:"error",error:"el usuario o la contraseña es incorrecta"})
         //validar passwrord
@@ -110,7 +110,7 @@ router.post("/login4",passport.authenticate("login", {failureRedirect:"/api/sess
         email: req.user.email,
         rol: req.user.rol
     }
-    console.log(req.session.user)
+    
     res.redirect("/api/products")
 })
 

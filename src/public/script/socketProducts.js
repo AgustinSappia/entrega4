@@ -9,7 +9,7 @@ const socketProduct =async (io) =>{
             socket.on("addProduct",async data =>{
                 try{
 
-                    console.log(data)
+                    
                     console.log( await prodManag.addProduct(data))
                 }
                 catch(error){

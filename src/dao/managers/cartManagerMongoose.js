@@ -112,7 +112,7 @@ async deleteProduct(cid,pid){
 
         if(index>=0){
             productos.splice(index,1)
-            console.log(productos)
+
         }
         else{
             return "el producto no existe"

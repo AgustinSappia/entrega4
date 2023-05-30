@@ -16,7 +16,7 @@ const initPassport = () =>{
     }, async(req, username ,password ,done)=>{
         const {first_name,last_name} = req.body
         const usernombre = req.body.username
-        console.log(username)
+        
         try{
             let userDB =await userModel.findOne({email: username})   // el username es el email disfrazado
             if (userDB) return done(null,false)
@@ -30,7 +30,6 @@ const initPassport = () =>{
                 username: usernombre,
                 rol:"user"
             }
-            console.log(newUser)
             let result = await userModel.create(newUser)
             return done(null, result)
         }
