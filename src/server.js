@@ -2,44 +2,66 @@
 const express = require("express")
 const session =require("express-session")
 
+// routes
 const routerProducts = require("./routes/products.router")
 const routerCart = require("./routes/cart.router")
 const pruebasRouter = require("./routes/pruebas.router")
 const sessionRouter = require("./routes/session.router")
+const viewsRouter = require("./routes/views.router")
+//_________________________________________________________________________________
 const {Server}= require("socket.io")
 const cookieParser = require("cookie-parser")
 const MongoStore = require("connect-mongo")
 let app = express()
 let puerto = 8080
 
-const httpServer = app.listen(puerto,()=>{
-    
-    console.log(`escuchando puerto: ${puerto}`)
-})
 
-const socketServer = new Server(httpServer)
 
 //mongoo prueba
 const objetConfigs = require("./config/objetConfigs")
 objetConfigs.connectDb()
-const {userModel} = require("./dao/models/user.model")
+//_________________________________________________________________________________________
 
-
-//hbs------------------------
-const handlebars= require("express-handlebars");
-const { socketProduct } = require("./public/script/socketProducts")
-const { chatSocket } = require("./public/script/chatSocket")
+//filestore
 const filestore = require("session-file-store")
 const filestorage = filestore(session)
+//_________________________________________________________________________________________
+//socket
+const { socketProduct } = require("./public/script/socketProducts")
+const { chatSocket } = require("./public/script/chatSocket")
+//______________________________________________________________________________________
+//hbs
+const handlebars= require("express-handlebars");
 app.engine("handlebars", handlebars.engine())
 app.set("views", __dirname+"/views")
 app.set("view engine", "handlebars")
-//hbs------------------------
+//________________________________________________________________________________________
 
+//express
 app.use(express.json()) //body-parser implementa una libreria nativa que antes era externa
 app.use(express.urlencoded({extended: true})) //permite recibir url complejas en express
 app.use(express.static(__dirname+"/public"))
+//_________________________________________________________________________________________
+//cookieParser
 app.use(cookieParser("CoderS3cR3tC0D3"))
+//_________________________________________________________________________________________
+//passport
+const { initPassport, initPassportGithub } = require("./config/passport.config")
+const passport = require("passport")
+
+//_________________________________________________________________________________________
+
+
+//puerto
+const httpServer = app.listen(puerto,()=>{
+    
+    console.log(`escuchando puerto: ${puerto}`)
+})
+const socketServer = new Server(httpServer)
+
+//_________________________________________________________________________________________
+
+
 
 app.use(session({
     store:MongoStore.create({
@@ -51,6 +73,12 @@ app.use(session({
     resave:false,
     saveUninitialized:false
 }))
+
+initPassport()
+initPassportGithub()
+passport.use(passport.initialize())
+passport.use(passport.session())
+
 //GET
 
 
@@ -59,10 +87,10 @@ app.get("/",async(req,res)=>{
     try{
         console.log("inicio")
         if(!req.session.user){
-            res.redirect("/session/login3")
+            res.redirect("/login")
         }
         else{
-            res.redirect("/products")
+            res.redirect("/api/products")
         }
     }
     catch(error){
@@ -82,17 +110,18 @@ app.get("/cookie", async(req,res)=>{
 
 
 
+
 socketServer.on("connection", socket =>{
     console.log("nuevo usuario conectado")
 })
 socketProduct(socketServer)
 chatSocket(socketServer)
 
-app.use("/products",routerProducts)
-app.use("/cart",routerCart)
-app.use("/test",pruebasRouter)      //router para hacer diferentes pruebas
-app.use("/session",sessionRouter)
-
+app.use("/api/products",routerProducts)
+app.use("/api/cart",routerCart)
+app.use("/api/message",pruebasRouter)      //router para hacer diferentes pruebas
+app.use("/api/session",sessionRouter)
+app.use("/",viewsRouter)
 
 
 

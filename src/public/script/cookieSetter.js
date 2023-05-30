@@ -8,7 +8,7 @@ form.addEventListener("submit",(e)=> {
 
     data.forEach((value,key)=> obj[key]=value)
   
-    fetch("/session/login2",{
+    fetch("/api/session/loginCookies",{
         method: "POST",
         headers:{
             "Content-Type":"application/json"

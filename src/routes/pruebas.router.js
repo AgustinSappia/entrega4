@@ -1,12 +1,14 @@
 const {Router} = require("express")
 const router = Router()
 const ProductManager = require("../managers/productManager");
+const ProductManagerMongo = require("../dao/managers/productManagerMongoose");
+prodManagerMongo= new ProductManagerMongo()
 let prodManager=new ProductManager()
 
 router.get("/aleatorio", async(req,res)=>{
     try{
 
-        let productos = await prodManager.getProduct()
+        let productos = await prodManagerMongo.getProduct()
         
         let producto = productos[Math.floor(Math.random()*8)]
         let testUser= producto
@@ -20,10 +22,10 @@ router.get("/aleatorio", async(req,res)=>{
 router.get("/prodStatic", async(req,res)=>{
     try{
 
-        let productos = await prodManager.getProduct()
-        let testUser={productos}
+        let productos = await prodManagerMongo.getProduct()
         
-        res.render("estatico",testUser)
+        
+        res.render("estatico",{productos})
     }
     catch(error){
         console.log(error)

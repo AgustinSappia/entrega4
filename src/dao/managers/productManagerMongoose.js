@@ -33,7 +33,7 @@ class ProductManagerMongo{
     
     async getProduct(){
       try{
-        return await productsModel.find()
+        return await productsModel.find({})
     }
     catch (error){
         return new Error(error)

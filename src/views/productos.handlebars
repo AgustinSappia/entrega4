@@ -3,7 +3,7 @@
         {{#if session.user}}
             <H1>bienvenido {{session.user.first_name}}</H1>
             <h2>tu rol es : {{session.user.rol}}</h2>
-            <form action="/session/logout" method="GET"><button>Logout</button></form>
+            <form action="/api/session/logout" method="GET"><button>Logout</button></form>
             {{else}}
             <h1>no ingreso usuario</h1>
         {{/if}}
@@ -17,10 +17,10 @@
             </li>
         {{/each}}
         {{#if hasPrevPage}}
-        <a href="/products?page={{prevPage}}"><button>Atras</button></a>
+        <a href="/api/products?page={{prevPage}}"><button>Atras</button></a>
         {{/if}}
         {{#if hasNextPage}}
-        <a href="/products?page={{nextPage}}"><button>Siguiente</button></a>
+        <a href="/api/products?page={{nextPage}}"><button>Siguiente</button></a>
         {{/if}}
     {{else}}
     <h1>No hay productos</h1>
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
 function enviarAlCarrito(objetoId){
 
-    fetch(`/cart/645ff5f7d43ade4e65d5993e/products/${objetoId}`,{
+    fetch(`api/cart/645ff5f7d43ade4e65d5993e/products/${objetoId}`,{
         method:"POST",
         headers:{
             "Content-Type":"application/json"

@@ -16,7 +16,18 @@ router.get("/",async (rec,res)=>{
     res.send(carritos)
 })
 
-router.get("/:cid",async(req,res)=>{
+
+
+router.post("/",async(req,res)=>{
+    try{
+        res.send(await cartManager.createCart())
+    }
+    catch(error){
+    res.send("todo mal").status(500)
+}
+})
+
+router.get("/cart/:cid",async(req,res)=>{
     try{
     let {cid} = req.params
     const {products} =await cartManager.searchCartById(cid)
@@ -30,14 +41,6 @@ router.get("/:cid",async(req,res)=>{
     }
 })
 
-router.post("/",async(req,res)=>{
-    try{
-        res.send(await cartManager.createCart())
-    }
-    catch(error){
-    res.send("todo mal").status(500)
-}
-})
 
 router.post("/:cid/products/:pid",async(req,res)=>{
     try{

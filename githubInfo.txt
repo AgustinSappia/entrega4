@@ -1,0 +1,5 @@
+App ID: 340251
+
+Client ID: Iv1.cf202a0acbc10f70
+
+Client secrets: 4aaa5e892c4721ebdbbe0080b68b301992dc6b09

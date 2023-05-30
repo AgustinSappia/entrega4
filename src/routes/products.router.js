@@ -20,8 +20,8 @@ router.get("/",async(request,response)=>{
         
         let productos = await prodManager.getProductPaginate(page,limit,filtro,orden)
         const {docs,hasPrevPage,hasNextPage,prevPage,nextPage,totalPages} = productos
-        let nextLink = "/products?page="+nextPage
-        let prevLink ="/products?page="+prevPage
+        let nextLink = "/api/products?page="+nextPage
+        let prevLink ="/api/products?page="+prevPage
         let session = request.session 
 
         if(!esNumero){
