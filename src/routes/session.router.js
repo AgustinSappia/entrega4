@@ -4,6 +4,7 @@ const { auth } = require("../dao/middlewares/autentication")
 const session = require("express-session")
 const { createHash, isValidPassword } = require("../utils/bcryptHash")
 const passport = require("passport")
+const { generateToken } = require("../utils/jwt")
 const router = Router()
 
 
@@ -48,7 +49,10 @@ router.get("/",auth,async(req,res)=>{
 
 router.get("/loginCookies",async(req,res)=>{
     try{
-    res.render("loginCookies",{})
+        console.log("hola")
+        let token = generateToken({nombre:"raul"})
+        console.log(token)
+        res.render("loginCookies",{})
     }
     catch (error){
         res.send(error)
