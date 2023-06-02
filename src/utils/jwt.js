@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-const JWT_PRIVATE_KEY = "palabraJWTsecreta"
+const JWT_PRIVATE_KEY = "palabraJwtSecreto"
 
 
 const generateToken= (user)=>{

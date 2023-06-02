@@ -5,7 +5,7 @@ const session =require("express-session")
 // routes
 const routerProducts = require("./routes/products.router")
 const routerCart = require("./routes/cart.router")
-const pruebasRouter = require("./routes/pruebas.router")
+const socketRouter = require("./routes/socket.router")
 const sessionRouter = require("./routes/session.router")
 const viewsRouter = require("./routes/views.router")
 //_________________________________________________________________________________
@@ -46,8 +46,11 @@ app.use(express.static(__dirname+"/public"))
 app.use(cookieParser("CoderS3cR3tC0D3"))
 //_________________________________________________________________________________________
 //passport
-const { initPassport, initPassportGithub } = require("./config/passport.config")
+// const { initPassport, initPassportGithub } = require("./config/passport.config")
 const passport = require("passport")
+const { initPassport } = require("./passport-jwt/passport.config")
+
+
 
 //_________________________________________________________________________________________
 
@@ -63,21 +66,21 @@ const socketServer = new Server(httpServer)
 
 
 
-app.use(session({
-    store:MongoStore.create({
-        mongoUrl:"mongodb+srv://agustinsappia12:Dni42206141@cluster0.uvoardd.mongodb.net/?retryWrites=true&w=majority",
-        mongoOptions:{useNewUrlParser:true, useUnifiedTopology:true},
-        ttl:300
-    }),
-    secret:"SsEeCcRrEeTtCcOoDdEe",
-    resave:false,
-    saveUninitialized:false
-}))
+// app.use(session({
+//     store:MongoStore.create({
+//         mongoUrl:"mongodb+srv://agustinsappia12:Dni42206141@cluster0.uvoardd.mongodb.net/?retryWrites=true&w=majority",
+//         mongoOptions:{useNewUrlParser:true, useUnifiedTopology:true},
+//         ttl:300
+//     }),
+//     secret:"SsEeCcRrEeTtCcOoDdEe",
+//     resave:false,
+//     saveUninitialized:false
+// }))
 
 initPassport()
-initPassportGithub()
+// initPassportGithub()
 passport.use(passport.initialize())
-passport.use(passport.session())
+// passport.use(passport.session())
 
 //GET
 
@@ -86,7 +89,7 @@ passport.use(passport.session())
 app.get("/",async(req,res)=>{
     try{
         console.log("inicio")
-        if(!req.session.user){
+        if(!req.session){
             res.redirect("/login")
         }
         else{
@@ -119,7 +122,7 @@ chatSocket(socketServer)
 
 app.use("/api/products",routerProducts)
 app.use("/api/cart",routerCart)
-app.use("/api/message",pruebasRouter)      //router para hacer diferentes pruebas
+app.use("/api/message",socketRouter)      
 app.use("/api/session",sessionRouter)
 app.use("/",viewsRouter)
 

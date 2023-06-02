@@ -5,7 +5,10 @@ const session = require("express-session")
 const { createHash, isValidPassword } = require("../utils/bcryptHash")
 const passport = require("passport")
 const { generateToken } = require("../utils/jwt")
+const { passportCall } = require("../passport-jwt/passportCall")
+const { authorization } = require("../passport-jwt/authorizationJwtRole")
 const router = Router()
+
 
 
 router.get("/",auth,async(req,res)=>{
@@ -79,7 +82,6 @@ router.post("/loginCookies",async(req,res)=>{
 router.post("/login3",async(req,res)=>{
     try{
         const{email,password}=req.body
-
         if(!email||!password) return res.send({status:"error",error:"hay campos faltantes"})
         const search = await userModel.findOne({email})
         
@@ -87,16 +89,30 @@ router.post("/login3",async(req,res)=>{
         if (!search) return res.send({status:"error",error:"el usuario o la contraseña es incorrecta"})
         //validar passwrord
         if(!isValidPassword(search,password)) return res.status(403).send({status:"error", message:"el usuario o la contraseña es incorrecta"})
-        req.session.user ={
+        
+        // req.session.user ={
+        //     first_name: search.first_name,
+        //     last_name: search.last_name,
+        //     username: search.username,
+        //     email: search.email,
+        //     rol: search.rol
+        // }
+        // res.redirect("/products")
+
+          let user ={
             first_name: search.first_name,
             last_name: search.last_name,
             username: search.username,
             email: search.email,
             rol: search.rol
-        }
-        res.redirect("/products")
-
+        }    
+        let token = generateToken(user)
         
+        res.cookie("tokenCookie",token,{
+            maxAge: 60*60*100,
+            httpOnly:true
+        }).send({status:"success", token:token})
+    
     }
     catch(error){
         res.send(error)
@@ -193,6 +209,10 @@ router.get("/logout",async(req,res)=>{
     catch(error){
         res.send(error)
     }
+})
+
+router.get("/current", passportCall("jwt"),authorization("admin") , async(req,res)=>{
+    res.send(req.user)
 })
 
 

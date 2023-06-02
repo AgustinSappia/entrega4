@@ -1,9 +1,12 @@
 <form id="login2" onsubmit="return false">
 
-    <label>username</label><input name="username" type="text">
-    <label >email:</label><input name="email" type="text">
+    <label>email</label><input name="email" type="text">
+    <label >password:</label><input name="password" type="text">
+    <button>send</button>
     <input type="submit">
 </form>
+    <a href="/api/session/github">Ingresar com github</a>
+    <a href="/api/session/register"><button>register</button></a>
     <button onclick="getCookies()" >ver cookie</button>
 
 <script src="/script/cookieSetter.js"></script>

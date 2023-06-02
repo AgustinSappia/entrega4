@@ -23,7 +23,7 @@ socket.on("productos",data =>{
     let listaProd = document.getElementById("productosId")
     let liProducto =""
     data.forEach(producto => {
-        liProducto += `<li>PRECIO: ${producto.title}--|--ID:${producto.id}</li>`
+        liProducto += `<li>PRECIO: ${producto.title}--|--ID:${producto._id}</li>`
 
         
     });

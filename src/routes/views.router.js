@@ -10,7 +10,7 @@ const router = Router()
 
 router.get("/login",async(req,res)=>{
     try{
-    res.render("login",{})
+    res.render("loginCookies",{})
     }
     catch (error){
         res.send(error)

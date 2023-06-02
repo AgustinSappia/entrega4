@@ -3,11 +3,12 @@ const {Router} = require("express")
 const router = Router()
 
 const ProductManager = require("../dao/managers/productManagerMongoose") 
+const passport = require("passport")
 const prodManager = new ProductManager()
 
 
 
-router.get("/",async(request,response)=>{
+router.get("/",passport.authenticate("jwt",{session:false}),async(request,response)=>{
     try{
         let {limit=3,page=1,query,data,sort} = request.query    
         let filtro = {}     //creamos un filtro usando los query params de query y data
