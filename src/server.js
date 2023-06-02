@@ -8,6 +8,8 @@ const routerCart = require("./routes/cart.router")
 const socketRouter = require("./routes/socket.router")
 const sessionRouter = require("./routes/session.router")
 const viewsRouter = require("./routes/views.router")
+const UserRouter = require("./routes/newUser.router")
+const usersRouter= new UserRouter()
 //_________________________________________________________________________________
 const {Server}= require("socket.io")
 const cookieParser = require("cookie-parser")
@@ -49,6 +51,7 @@ app.use(cookieParser("CoderS3cR3tC0D3"))
 // const { initPassport, initPassportGithub } = require("./config/passport.config")
 const passport = require("passport")
 const { initPassport } = require("./passport-jwt/passport.config")
+
 
 
 
@@ -125,6 +128,7 @@ app.use("/api/cart",routerCart)
 app.use("/api/message",socketRouter)      
 app.use("/api/session",sessionRouter)
 app.use("/",viewsRouter)
+app.use("/api/usuarios",usersRouter.getRouter())
 
 
 
