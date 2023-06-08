@@ -15,7 +15,7 @@ const initPassport = () =>{
         usernameField: "email"      // es para que tome el valor de email como campo del username
     }, async(req, username ,password ,done)=>{
         const {first_name,last_name} = req.body
-        const usernombre = req.body.username
+
         
         try{
             let userDB =await userModel.findOne({email: username})   // el username es el email disfrazado
@@ -27,7 +27,6 @@ const initPassport = () =>{
                 last_name,
                 email: username,
                 password: createHash(password),
-                username: usernombre,
                 rol:"user"
             }
             let result = await userModel.create(newUser)
@@ -45,27 +44,27 @@ const initPassport = () =>{
            let user = await userModel.findOne({_id:id})
            done(null,user)
        })
-}
-
-
-
-passport.use("login", new LocalStrategy({
-    usernameField: "email"
-}, async(username,password,done)=>{
-    try{
-    
-        const userDB = await userModel.findOne({email:username})
-        if (!userDB) return done(null,false)
-        if(!isValidPassword(userDB,password)) return done(null,false)
-        return done(null,userDB)
+       
+       
+       
+       passport.use("login", new LocalStrategy({
+           usernameField: "email"
+        }, async(username,password,done)=>{
+            try{
+                
+                const userDB = await userModel.findOne({email:username})
+                if (!userDB) return done(null,false)
+                if(!isValidPassword(userDB,password)) return done(null,false)
+                return done(null,userDB)
+            }
+            catch(error){
+                console.log("error en el strategy login")
+            }
+        }
+        
+        ))
     }
-    catch(error){
-        console.log("error en el strategy login")
-    }
-}
-
-))
-
+        
 const initPassportGithub = ()=>{
     passport.use("github", new githubStrategy({
         clientID: process.env.GITHUB_CLIENT_ID,
@@ -77,7 +76,6 @@ const initPassportGithub = ()=>{
             let user = await userModel.findOne({email:profile._json.email})
             if(!user){
                 let newUser={
-                    username:profile.username,
                     first_name: profile.username,
                     last_name: profile.username,
                     email: profile._json.email,

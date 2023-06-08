@@ -52,6 +52,10 @@ app.use(cookieParser("CoderS3cR3tC0D3"))
 const passport = require("passport")
 const { initPassport } = require("./passport-jwt/passport.config")
 
+//cors
+// const cors= require("cors")
+// app.use(cors())
+
 
 
 
