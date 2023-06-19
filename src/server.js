@@ -2,6 +2,9 @@
 const express = require("express")
 const session =require("express-session")
 
+//.env
+require("dotenv").config()
+
 // routes
 const routerProducts = require("./routes/products.router")
 const routerCart = require("./routes/cart.router")
@@ -22,6 +25,7 @@ let puerto = 8080
 //mongoo prueba
 const objetConfigs = require("./config/objetConfigs")
 objetConfigs.connectDb()
+
 //_________________________________________________________________________________________
 
 //filestore
@@ -45,7 +49,7 @@ app.use(express.urlencoded({extended: true})) //permite recibir url complejas en
 app.use(express.static(__dirname+"/public"))
 //_________________________________________________________________________________________
 //cookieParser
-app.use(cookieParser("CoderS3cR3tC0D3"))
+app.use(cookieParser(process.env.COOKIE_PARSE_CODE))
 //_________________________________________________________________________________________
 //passport
 // const { initPassport, initPassportGithub } = require("./config/passport.config")

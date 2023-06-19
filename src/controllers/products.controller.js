@@ -1,6 +1,8 @@
-const ProductManager = require("../dao/managers/productManagerMongoose") 
+
 const passport = require("passport")
-const prodManager = new ProductManager()
+const { productService } = require("../services")
+
+const prodManager = productService
 
 class ProductsController{
 
