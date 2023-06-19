@@ -17,7 +17,7 @@ postCarrito = async(req,res)=>{
         res.send(await cartManager.createCart())
     }
     catch(error){
-    res.send("todo mal").status(500)
+    res.status(500).send("todo mal")
 }
 }
 
