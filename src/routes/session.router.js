@@ -201,15 +201,17 @@ router.post("/register",async(req,res)=>{
 
 //LOGOUT
 
-router.get("/logout",async(req,res)=>{
+router.get("/logout",passportCall("jwt"),async(req,res)=>{
     try{
-        req.session.destroy(err=>{
-            if(!err) res.redirect("/login")
-            else res.send({status:"logout Error", body:err})
-        })
+
+        res.clearCookie("tokenCookie")
+
+        res.redirect("/")
+
 
     }
     catch(error){
+ 
         res.send(error)
     }
 })

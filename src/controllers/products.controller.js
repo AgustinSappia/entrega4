@@ -22,7 +22,7 @@ class ProductsController{
             const {docs,hasPrevPage,hasNextPage,prevPage,nextPage,totalPages} = productos
             let nextLink = "/api/products?page="+nextPage
             let prevLink ="/api/products?page="+prevPage
-            let session = request.session 
+            let session = request.user
             
             if(!esNumero){
                 limit=2  //si no ingresa un limite valido lo dejo en 10 que es el por defecto

@@ -99,7 +99,6 @@ passport.use(passport.initialize())
 
 app.get("/",async(req,res)=>{
     try{
-        console.log("inicio")
         if(!req.session){
             res.redirect("/login")
         }
