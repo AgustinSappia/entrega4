@@ -115,10 +115,23 @@ pucharse = async(req,res)=>{
         let client = req.user.email
 
         let resp = await cartService.pucharseCart(cid,client)
-
-        console.log(resp)
+        if(!resp){
+            res.status(400).send({status:"error", payload:"No existe respuesta de compra"})
+        }
+        else{
+            console.log(resp)
+            res.status(500).send(resp.result)
+        }
     } catch (error) {
         res.status(500).send({payload:error})
+    }
+}
+
+renderPucharse= async(req,res)=>{
+    try {
+        res.render("pucharse")
+    } catch (error) {
+        res.send(error)
     }
 }
 

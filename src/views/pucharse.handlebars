@@ -5,9 +5,37 @@
 <div>
     <h2>articulos comprados con exito</h2>
     
-    <ul>
-        {{#each resp.comprados}}
-        <li>{{resp.comprados.title}}</li>
-        {{/each}}
+    <ul id="compradosContainer">
+
     </ul>
+    <h2>articulos que no se pudieron comprar</h2>
+    <ul id="falladosContainer">
+
+    </ul>
+    <a href="/api/products">volver al inicio</a>
 </div>
+
+<script>
+
+const objetoJSON = localStorage.getItem('postData');
+
+const objeto = JSON.parse(objetoJSON);
+
+let compradosHTML = '';
+objeto.comprados.forEach((producto, index) => {
+  compradosHTML += `<li>
+                      <h3>${producto.title}</h3>
+                    </li>`;
+});
+
+let falladosHTML = '';
+objeto.fallados.forEach((producto, index) => {
+  falladosHTML += `<li>
+                     <h3>${producto.title}</h3>
+                   </li>`;
+});
+
+document.getElementById('compradosContainer').innerHTML = compradosHTML;
+document.getElementById('falladosContainer').innerHTML = falladosHTML;
+
+</script>

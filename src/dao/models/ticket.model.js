@@ -6,7 +6,7 @@ const collection= "ticket"
 const ticketSchema = new mongoose.Schema({
     code: {
         type: String,
-        // unique: true,
+        unique: true,
         required: true
     },
     pucharse_datetime:{
@@ -21,7 +21,9 @@ const ticketSchema = new mongoose.Schema({
     purcharser:{
         type: String,
         required: true
-    }
+    },
+    products:Object,
+
 })
 
 const ticketModel = mongoose.model(collection,ticketSchema)

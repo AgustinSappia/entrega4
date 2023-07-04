@@ -159,34 +159,44 @@ async pucharseCart(cid,client){
 
         let cart = await cartsModel.findById({_id:cid})
         let result= {comprados:[],fallados:[]}
-        console.log(cid + client)
-        console.log("queoinasd")
+
         await Promise.all( //Usamos Promise.all para esperar a que se completen todas las promesas generadas por las operaciones asíncronas dentro del map.
 
-         cart.products.map(async producto=>{    //Utilizamos map en lugar de forEach para iterar sobre los productos del carrito. Esto nos permite obtener un array de promesas.    
-                const product = await productsModel.findById(producto.product);
+        cart.products.map(async producto=>{    //Utilizamos map en lugar de forEach para iterar sobre los productos del carrito. Esto nos permite obtener un array de promesas.    
+            const product = await productsModel.findById(producto.product);
                 if((product.stock - producto.cantidad)<0){
                     result.fallados.push(product)
-                    // console.log(result.fallados)
+
                 }
                 else{
                     product.stock = product.stock - producto.cantidad
                     let update = await productsModel.findOneAndUpdate({_id:producto.product},product,{new:true})
-                    // console.log(update)
                     result.comprados.push(product)
+
                 }
             })
             )
-      let precioTotal = result.comprados.reduce ((total,producto)=> total+producto.price, 0)
+
+        let filtro= cart.products.filter(objeto => {
+            objeto.product === result.fallados._id
+        })
+        const idsArray = result.fallados.map(obj => obj._id.toString()); //creamos un array solamente con la id del array de fallados, el toString esta para quitar el newObjetId("")
+        const nuevoCart = cart.products.filter(obj => idsArray.includes(obj.product.toString()))
+        cart.products=nuevoCart
+
+        await cartsModel.findByIdAndUpdate({_id:cid},cart)
+
+        let precioTotal = result.comprados.reduce ((total,producto)=> total+producto.price, 0)
         const ticket = await ticketModel.create({
-            
+
             purcharser: client,
             code:uuidv4(),
             products: result.comprados,
-            amount:precioTotal
+            amount:precioTotal,
 
         })
-        return ticket
+
+        return {ticket,result}
         
     }
     catch(error){
