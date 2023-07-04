@@ -2,8 +2,10 @@ const {Router} = require("express")
 const router = Router()
 const ProductManager = require("../managers/productManager");
 const ProductDaoMongo = require("../dao/managers/productDaoMongoose");
-prodManagerMongo= new ProductDaoMongo()
-let prodManager=new ProductManager()
+const { passportCall } = require("../passport-jwt/passportCall");
+const { authorization } = require("../passport-jwt/authorizationJwtRole");
+let prodManagerMongo= new ProductDaoMongo()
+
 
 router.get("/aleatorio", async(req,res)=>{
     try{
@@ -42,7 +44,7 @@ router.get("/productosSocket",async (req,res)=>{
 
 })
 
-router.get("/chatSocket", (req,res)=>{
+router.get("/chatSocket", passportCall("jwt"),authorization("user"),(req,res)=>{
     res.render("chatSocket")
 })
 

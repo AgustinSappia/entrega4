@@ -24,14 +24,7 @@ class SessionController{
 
   getSession =  async(req,res)=>{
         try{
-            if(req.session.counter){
-                req.session.counter++
-                res.send(`se ha visitado el sitio ${req.session.counter} veces. `)
-            }
-            else{
-                req.session.counter = 1 
-                res.send("bienvenido por primera vez")
-            }
+            res.send(req.user)
         }
         catch(error){
             res.send(error)

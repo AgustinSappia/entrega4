@@ -16,7 +16,7 @@ const cartManager = new CartDaoMongo()
 
 
 
-router.get("/",auth,sessionController.getSession)
+router.get("/",passportCall("jwt"),authorization("admin"),sessionController.getSession)
 
 
 //LOGIN

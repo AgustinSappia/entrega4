@@ -56,6 +56,8 @@ app.use(cookieParser(process.env.COOKIE_PARSE_CODE))
 // const { initPassport, initPassportGithub } = require("./config/passport.config")
 const passport = require("passport")
 const { initPassport } = require("./passport-jwt/passport.config")
+const { authorization } = require("./passport-jwt/authorizationJwtRole")
+const { passportCall } = require("./passport-jwt/passportCall")
 
 //cors
 // const cors= require("cors")
