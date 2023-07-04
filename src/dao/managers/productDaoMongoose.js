@@ -2,7 +2,7 @@
 const fs = require("fs")
 const {productsModel} = require("../models/product.model")
 let products=[]
-class ProductManagerMongo{
+class ProductDaoMongo{
 
     async addProduct(product){
       try{
@@ -87,7 +87,7 @@ async deleteProduct(id){
 }
 
 
-module.exports = ProductManagerMongo
+module.exports = ProductDaoMongo
 
 
 

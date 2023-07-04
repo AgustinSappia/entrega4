@@ -1,4 +1,4 @@
-const productManager = require("../../dao/managers/productManagerMongoose")
+const productManager = require("../../dao/managers/productDaoMongoose")
 const prodManag = new productManager()
 
 const socketProduct =async (io) =>{

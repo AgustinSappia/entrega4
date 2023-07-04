@@ -1,11 +1,18 @@
-const CartManagerMongo = require("../dao/managers/cartManagerMongoose");
-const ProductManagerMongo = require("../dao/managers/productManagerMongoose");
+const CartDaoMongo = require("../dao/managers/cartDaoMongoose");
+const ContactDaoMongo = require("../dao/managers/contactDaoMongoose");
+const ProductDaoMongo = require("../dao/managers/productDaoMongoose");
+const CartsRepository = require("../dao/repositories/cartsRepository");
+const ContactsRepository = require("../dao/repositories/contacts.repository");
 
-const productService = new ProductManagerMongo ()
-const cartService = new CartManagerMongo ()
+
+
+const productService = new ProductDaoMongo ()
+const cartService = new CartsRepository( new CartDaoMongo ())
+const contactService = new ContactsRepository (new ContactDaoMongo ())
 
 
 module.exports = {
     productService,
-    cartService
+    cartService,
+    contactService
 }

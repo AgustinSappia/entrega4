@@ -9,26 +9,14 @@ const { passportCall } = require("../passport-jwt/passportCall")
 const { authorization } = require("../passport-jwt/authorizationJwtRole")
 const router = Router()
 
-const CartManagerMongo = require("../dao/managers/cartManagerMongoose")
-const cartManager = new CartManagerMongo()
+const CartDaoMongo = require("../dao/managers/cartDaoMongoose")
+const userDto = require("../dto/user.dto")
+const sessionController = require("../controllers/session.controller")
+const cartManager = new CartDaoMongo()
 
 
 
-router.get("/",auth,async(req,res)=>{
-    try{
-        if(req.session.counter){
-            req.session.counter++
-            res.send(`se ha visitado el sitio ${req.session.counter} veces. `)
-        }
-        else{
-            req.session.counter = 1 
-            res.send("bienvenido por primera vez")
-        }
-    }
-    catch(error){
-        res.send(error)
-    }
-})
+router.get("/",auth,sessionController.getSession)
 
 
 //LOGIN
@@ -82,39 +70,7 @@ router.get("/",auth,async(req,res)=>{
 
 
 
-router.post("/login3",async(req,res)=>{
-    try{
-        const{email,password}=req.body
-        if(!email||!password) return res.send({status:"error",error:"hay campos faltantes"})
-        const search = await userModel.findOne({email})
-        
-        if (!search) return res.send({status:"error",error:"el usuario o la contraseña es incorrecta"})
-        // //validar passwrord
-        if(!isValidPassword(search,password)) return res.status(403).send({status:"error", message:"el usuario o la contraseña es incorrecta"})
-        
-        let user ={
-            first_name: search.first_name,
-            last_name: search.last_name,
-            email: search.email,
-            rol: search.rol,
-            age:search.age,
-            cart:search.cart
-        }    
-        let token = generateToken(user)
-
-           
-            res.cookie("tokenCookie",token,{
-                maxAge: 60*60*10000,
-                httpOnly:true
-            }).redirect("/api/products")
-
-            
-    
-    }
-    catch(error){
-        res.send(error)
-    }
-})
+router.post("/login3",sessionController.login3)
 
 // //login con passport 
 // router.post("/login4",passport.authenticate("login", {failureRedirect:"/api/session/faillogin",succesRedirect:"/api/products"}), async(req,res)=>{
@@ -146,41 +102,7 @@ router.post("/login3",async(req,res)=>{
 
 
 
-router.post("/register",async(req,res)=>{
-    try{
-        const{first_name,last_name,email,password,age} = req.body
-        if(!first_name || !last_name || !email || !password || !age){
-            res.status(400).send({status:"error",error:"no ingreso todos los datos"})
-        }
-        const existUser = await userModel.findOne({email})
-        if(existUser) return res.send({status:"error", error:"el mail ya esta registrado"})
-        let cart = await cartManager.createCart()
-        const newUser={
-            username:"pepe",
-            first_name,
-            last_name,
-            email,
-            password: createHash(password),
-            age,
-            cart: cart._id,
-            rol:"user"
-        }
-        
-
-        console.log(newUser)
-        
-        let resultUser = await userModel.create(newUser)
-
-
-
-        res.status(200).redirect("/login")
-
-
-    }
-    catch(err){
-        console.log(err)
-    }
-})
+router.post("/register",sessionController.register)
 
 // router.post("/register",passport.authenticate("register",{
 //     failureRedirect: "api/session/failregister",
@@ -201,24 +123,9 @@ router.post("/register",async(req,res)=>{
 
 //LOGOUT
 
-router.get("/logout",passportCall("jwt"),async(req,res)=>{
-    try{
+router.get("/logout",passportCall("jwt"),sessionController.logout)
 
-        res.clearCookie("tokenCookie")
-
-        res.redirect("/")
-
-
-    }
-    catch(error){
- 
-        res.send(error)
-    }
-})
-
-router.get("/current", passportCall("jwt"),authorization("admin") , async(req,res)=>{
-    res.send(req.user)
-})
+router.get("/current", passportCall("jwt"),authorization("admin") , sessionController.current)
 
 
 

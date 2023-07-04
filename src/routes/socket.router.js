@@ -1,8 +1,8 @@
 const {Router} = require("express")
 const router = Router()
 const ProductManager = require("../managers/productManager");
-const ProductManagerMongo = require("../dao/managers/productManagerMongoose");
-prodManagerMongo= new ProductManagerMongo()
+const ProductDaoMongo = require("../dao/managers/productDaoMongoose");
+prodManagerMongo= new ProductDaoMongo()
 let prodManager=new ProductManager()
 
 router.get("/aleatorio", async(req,res)=>{

@@ -2,7 +2,7 @@ const {Router} = require("express")
 
 const router = Router()
 
-const ProductManager = require("../dao/managers/productManagerMongoose") 
+const ProductManager = require("../dao/managers/productDaoMongoose") 
 const passport = require("passport")
 const prodManager = new ProductManager()
 const { getProducts,getProductId,postProduct,putProduct,deleteProduct } = require("../controllers/products.controller")

@@ -12,6 +12,7 @@ const socketRouter = require("./routes/socket.router")
 const sessionRouter = require("./routes/session.router")
 const viewsRouter = require("./routes/views.router")
 const UserRouter = require("./routes/newUser.router")
+const contacRouter = require("./routes/contacts.router")
 const usersRouter= new UserRouter()
 //_________________________________________________________________________________
 const {Server}= require("socket.io")
@@ -136,6 +137,7 @@ app.use("/api/message",socketRouter)
 app.use("/api/session",sessionRouter)
 app.use("/",viewsRouter)
 app.use("/api/usuarios",usersRouter.getRouter())
+app.use("/contact",contacRouter)
 
 
 

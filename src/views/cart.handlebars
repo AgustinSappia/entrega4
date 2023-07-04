@@ -1,20 +1,73 @@
 <div>
+<h1>hola</h1>
 
 {{#each products}}
-<div>
-    <li>
-
-    <strong>id: </strong>{{this.product._id}}--
-    <strong>title: </strong>{{this.product.title}}--
-    <strong>description: </strong>{{this.product.description}}--
-    <strong>price: </strong>{{this.product.price}}--
-    <strong>thumbnail: </strong>{{this.product.thumbnail}}--
-    <strong>code: </strong>{{this.product.code}}--
-    <strong>stock: </strong>{{this.product.stock}}--
-    <strong>status: </strong>{{this.product.status}}
-    
-    </li>
+    <div>
+        <li>
+            <strong>title: </strong>{{this.product.title}}--
+            <strong>price: </strong>{{this.product.price}}--
+            <strong>cantidad a comprar: {{this.cantidad}}</strong>
+            <strong>disponibles: </strong>{{this.product.stock}}--
+            <a href="#" onclick="deleteItem('{{this.product._id}}','{{../cid}}')" ><button>Eliminar</button></a>
+        </li>
     </div>
-
 {{/each}}
+    <div>
+        <button onclick="buy(`{{cid}}`)">Realizar Compra</button>
+        <button onclick="deleteCart(`{{cid}}`)">Vaciar Carrito</button>
+        <a href="/api/products">volver</a>
+    </div>
 </div>
+
+<script>
+    function deleteItem(id,cid){
+        let data= {content:"id de eliminacion de carrito", id:id}
+        fetch(`/api/cart/${cid}/products/${id}`,{
+            method:"DELETE",
+            headers:{
+                "Content-Type": "aplication/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data =>{
+            console.log("eliminado "+ data)
+        })
+        .catch(error => console.log(error))
+    }
+    function deleteCart(cid){
+        data =""
+        fetch(`/api/cart/${cid}`,
+        {
+            method:"DELETE",
+            headers:{
+                "Content-Type": "aplication/json"
+            },
+            body: JSON.stringify(data)   
+        })
+        .then(response => response.json())
+        .then(data =>{
+            console.log("eliminado"+ data)
+        })
+        .catch(error=> console.log(error))
+    }
+
+    function buy(cid){
+         data =""
+        fetch(`/api/cart/${cid}/pucharse`,
+        {
+            method:"POST",
+            headers:{
+                "Content-Type": "aplication/json"
+            },
+            body: JSON.stringify(data)   
+        })
+        .then(response => response.json())
+        .then(data =>{
+            console.log("realizando compra"+ data)
+            window.location.href=`/api/cart/${cid}/pucharse`
+        })
+        .catch(error=> console.log(error))
+    }
+    
+</script>
