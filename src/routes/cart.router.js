@@ -7,9 +7,9 @@ const {getCarts,postCarrito,getCartId,postProductInCart,putCart,putProductInCart
 
 
 
-router.get("/",getCarts)
-router.get("/:cid",getCartId)
-router.get("/:cid/pucharse",renderPucharse)
+router.get("/",passportCall("jwt"),getCarts)
+router.get("/:cid",passportCall("jwt"),getCartId)
+router.get("/:cid/pucharse",passportCall("jwt"),renderPucharse)
 router.post("/:cid/pucharse",passportCall("jwt"),pucharse)
 router.post("/",postCarrito)
 router.post("/:cid/products/:pid",postProductInCart)

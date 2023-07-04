@@ -119,7 +119,6 @@ pucharse = async(req,res)=>{
             res.status(400).send({status:"error", payload:"No existe respuesta de compra"})
         }
         else{
-            console.log(resp)
             res.status(500).send(resp.result)
         }
     } catch (error) {

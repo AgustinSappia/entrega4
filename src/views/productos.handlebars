@@ -13,10 +13,11 @@
                 <strong>id: </strong>{{this._id}}
                 <strong>price:</strong>{{this.price}}
                 <strong>stock:</strong>{{this.stock}}
-                <button class="postProducto"  data-id="{{this.id}}">agregar al carrito</button>
+                <button class="userRol" data-id="{{this.id}}">agregar al carrito</button>
+
             </li>
         {{/each}}
-        <a href="/api/cart/{{session.user.cart}}"><button>Ver Carrito</button></a>
+        <a href="/api/cart/{{session.user.cart}}" class="userRol"><button>Ver Carrito</button></a>
         {{#if hasPrevPage}}
         <a href="/api/products?page={{prevPage}}"><button>Atras</button></a>
         {{/if}}
@@ -29,7 +30,7 @@
     {{/if}}
 </div>
 <hr>
-<div>
+<div class="adminRol">
     <h2>info de envio</h2>
     <li>status: {{status}}</li>
     <li>totalPages: {{totalPages}}</li>
@@ -44,17 +45,35 @@
 </div>
 
 <script>
-
+var userRol = "{{session.user.rol}}"
+console.log(userRol)
 document.addEventListener("DOMContentLoaded",function(){
-    let botones = document.getElementsByClassName("postProducto")
+    let elementosParaUsers = document.getElementsByClassName("userRol")
+    let elementosParaAdmins= document.getElementsByClassName("adminRol")
     let elementoCID= document.getElementById("cart-id")
+
     let CID = elementoCID.textContent.split(":")[1].trim() //e utiliza split(":") para dividir el contenido de texto en dos partes, separadas por el ":". Luego, se accede a la segunda parte utilizando [1], que corresponde al número "id" en este caso. Se utiliza trim() para eliminar cualquier espacio en blanco adicional alrededor del número.
-    for(let i = 0; i < botones.length; i++){
-        botones[i].addEventListener("click", function(){
+   
+    for(let i = 0; i < elementosParaUsers.length; i++){
+        if(userRol == "user"){
+                  elementosParaUsers[i].addEventListener("click", function(){
             let objetoId = this.getAttribute("data-id")
             enviarAlCarrito(objetoId,CID)
         })
+            
+        }
+        else{
+            elementosParaUsers[i].style.display = "none"
+        }
     }
+    for(let i = 0; i < elementosParaAdmins.length; i++){
+
+        if (userRol !=="admin"){
+             elementosParaAdmins[i].textContent = ""
+        }
+
+    }
+
 })
 
 function enviarAlCarrito(objetoId,CID){
