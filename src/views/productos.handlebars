@@ -4,6 +4,9 @@
             <H1>bienvenido {{session.user.first_name}}</H1>
             <h2>tu rol es : {{session.user.rol}}</h2>
             <form action="/api/session/logout" method="GET"><button>Logout</button></form>
+            <hr>
+            <a href="/pruebas/mail"><button>mail</button></a>
+            <a href="/api/message/chatSocket"><button>chat</button></a>
             {{else}}
             <h1>no ingreso usuario</h1>
         {{/if}}
@@ -17,6 +20,7 @@
 
             </li>
         {{/each}}
+        
         <a href="/api/cart/{{session.user.cart}}" class="userRol"><button>Ver Carrito</button></a>
         {{#if hasPrevPage}}
         <a href="/api/products?page={{prevPage}}"><button>Atras</button></a>
