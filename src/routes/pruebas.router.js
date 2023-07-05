@@ -1,35 +1,37 @@
 const {Router} = require("express")
+const { sendMail } = require("../utils/sendMail")
 require("dotenv").config()
 const router = Router()
 
-const nodemailer= require("nodemailer")
+
 
 
 router.get("/sms",(req,res)=>{
     
 })
 
-const transport = nodemailer.createTransport({
-    service:"gmail",
-    port:587,
-   
-    auth:{
-        user: "agustinsappia12@gmail.com",
-        pass: "ljvhrigukagczfty"
-    }
-})
+
 
 router.get("/mail",async(req,res)=>{
-    console.log(process.env.GMAIL_USER)
-    let result = await transport.sendMail({ 
-        from:"coder Test <Holis>",
-        to:"agustinsappia12@gmail.com",
-        subject:"correo de prueba",
-        html: `<div> 
-                    <h1>Esto es un texto del test</h1>
-                </div>`,
-        attachments:[]
-    })
+
+    // let to =""
+    // let subject=""
+    // let html=""
+
+    // let result = await sendMail()
+
+    res.render("mail")
+})
+
+router.post("/mail",async(req,res)=>{
+
+     let mail=req.body
+
+    let to =mail.to
+    let subject=mail.subject
+    let html=mail.html
+
+    let result = await sendMail(to,subject,html)
 
     res.send("mail enviado")
 })
