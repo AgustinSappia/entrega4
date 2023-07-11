@@ -14,6 +14,7 @@ const viewsRouter = require("./routes/views.router")
 const UserRouter = require("./routes/newUser.router")
 const contacRouter = require("./routes/contacts.router")
 const pruebasRouter = require("./routes/pruebas.router")
+const mockRouter = require("./routes/mock.router")
 const usersRouter= new UserRouter()
 //_________________________________________________________________________________
 const {Server}= require("socket.io")
@@ -59,7 +60,10 @@ const passport = require("passport")
 const { initPassport } = require("./passport-jwt/passport.config")
 const { authorization } = require("./passport-jwt/authorizationJwtRole")
 const { passportCall } = require("./passport-jwt/passportCall")
+const { errorHandler } = require("./dao/middlewares/error.middlewares")
 
+
+//manejo de errores
 //cors
 // const cors= require("cors")
 // app.use(cors())
@@ -142,9 +146,12 @@ app.use("/",viewsRouter)
 app.use("/api/usuarios",usersRouter.getRouter())
 app.use("/contact",contacRouter)
 app.use("/pruebas",pruebasRouter)
+app.use("/mockingProducts",mockRouter)
 
 
 
 
 
 
+
+app.use(errorHandler)

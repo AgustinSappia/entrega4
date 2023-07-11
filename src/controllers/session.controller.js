@@ -10,6 +10,9 @@ const { generateToken } = require("../utils/jwt")
 
 
 const CartDaoMongo = require("../dao/managers/cartDaoMongoose")
+const { CustomError } = require("../utils/CustomError/customError")
+const { generateUserErrorInfo } = require("../utils/CustomError/info")
+const { EError } = require("../utils/CustomError/EErrors")
 
 
 const cartManager = new CartDaoMongo()
@@ -66,10 +69,20 @@ class SessionController{
         }
     } 
 
-    register = async(req,res)=>{
+    register = async(req,res,next)=>{
         try{
-            const{first_name,last_name,email,password,age} = req.body
+            const{first_name,last_name,email,password,age} = req.body  
             if(!first_name || !last_name || !email || !password || !age){
+                CustomError.createError({
+                    name:"User creation error",
+                    cause: generateUserErrorInfo({
+                        first_name,
+                        last_name,
+                        email
+                    }),
+                    message: "Error trying to create user",
+                    code:EError.INVALID_TYPE_ERROR
+                })
                 res.status(400).send({status:"error",error:"no ingreso todos los datos"})
             }
             const existUser = await userModel.findOne({email})
@@ -97,8 +110,8 @@ class SessionController{
     
     
         }
-        catch(err){
-            console.log(err)
+        catch(error){
+            next(error)
         }
     }
 

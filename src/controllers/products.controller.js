@@ -1,6 +1,9 @@
 
 const passport = require("passport")
 const { productService } = require("../services")
+const { CustomError } = require("../utils/CustomError/customError")
+const { generatePoductErrorInfo } = require("../utils/CustomError/info")
+const { EError } = require("../utils/CustomError/EErrors")
 
 const prodManager = productService
 
@@ -74,15 +77,24 @@ class ProductsController{
     }
 }
 
- postProduct =async (req,res)=>{    //
+ postProduct =async (req,res,next)=>{    //
     try{
         let newProduct = await req.body
-        console.log( await prodManager.addProduct(newProduct))
+        // let{title,description,price,thumbnail,code,stock} = newProduct
+        if(!newProduct.title || !newProduct.description || !newProduct.price || !newProduct.thumbnail || !newProduct.code || !newProduct.stock){
+
+            CustomError.createError({
+                name:"User creation error",
+                cause: generatePoductErrorInfo(newProduct),
+                message: "Error trying to create user",
+                code:EError.INVALID_TYPE_ERROR
+            })
+        }
+        await prodManager.addProduct(newProduct)
         res.status(200).send({newProduct})
     }
     catch(error){
-        res.status(400).send({status:"error",mensaje:"algo salio mal"})
-        console.log(error)
+        next(error)
     }
 }
 
