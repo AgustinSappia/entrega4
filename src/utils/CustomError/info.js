@@ -15,10 +15,3 @@ exports.generatePoductErrorInfo = (product) => {
         * description: needs to a string, received ${product.description}`
 }
 
-
-title,
-description,
-price,
-thumbnail,
-code,
-stock
