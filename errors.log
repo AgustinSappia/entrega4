@@ -5,3 +5,6 @@ error: error
 info: info
 warning: alerta
 error: error
+fatal: fatal
+error: error
+warning: alerta
