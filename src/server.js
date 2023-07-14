@@ -15,6 +15,7 @@ const UserRouter = require("./routes/newUser.router")
 const contacRouter = require("./routes/contacts.router")
 const pruebasRouter = require("./routes/pruebas.router")
 const mockRouter = require("./routes/mock.router")
+const loggerTestRouter = require("./routes/loggerTest")
 const usersRouter= new UserRouter()
 //_________________________________________________________________________________
 const {Server}= require("socket.io")
@@ -151,6 +152,7 @@ app.use("/api/usuarios",usersRouter.getRouter())
 app.use("/contact",contacRouter)
 app.use("/pruebas",pruebasRouter)
 app.use("/mockingProducts",mockRouter)
+app.use("/loggerTest",loggerTestRouter)
 
 
 
