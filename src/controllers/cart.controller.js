@@ -32,20 +32,20 @@ getCartId = async(req,res)=>{
 
     }
     catch(error){
-        console.log(error)
+        req.logger.error(error)
     res.status(500).send(error)
     }
 }
 
 postProductInCart = async(req,res)=>{
     try{
-        console.log("ASDASDAS")
+        
         let{cid,pid} = req.params 
-        console.log(cid,pid)
+        req.logger.info(cid,pid)
         res.send( await cartService.postProductInCart(cid,pid))
     }
     catch(error){
-        console.log(error)
+        req.logger.error(error)
     }
 }
 
@@ -90,7 +90,7 @@ deleteProductInCart = async(req,res)=>{
         }
     }
     catch(error){
-        console.log(error)
+        req.logger.error(error)
     }
 
     

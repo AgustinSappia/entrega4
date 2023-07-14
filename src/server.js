@@ -21,13 +21,13 @@ const {Server}= require("socket.io")
 const cookieParser = require("cookie-parser")
 const MongoStore = require("connect-mongo")
 let app = express()
-let puerto = 8080
 
 
 
 //mongoo prueba
 const objetConfigs = require("./config/objetConfigs")
 objetConfigs.connectDb()
+let puerto = process.env.PORT
 
 //_________________________________________________________________________________________
 
@@ -61,7 +61,11 @@ const { initPassport } = require("./passport-jwt/passport.config")
 const { authorization } = require("./passport-jwt/authorizationJwtRole")
 const { passportCall } = require("./passport-jwt/passportCall")
 const { errorHandler } = require("./dao/middlewares/error.middlewares")
+const { addLogger, logger } = require("./config/logger")
 
+//
+
+app.use(addLogger)
 
 //manejo de errores
 //cors
@@ -77,7 +81,7 @@ const { errorHandler } = require("./dao/middlewares/error.middlewares")
 //puerto
 const httpServer = app.listen(puerto,()=>{
     
-    console.log(`escuchando puerto: ${puerto}`)
+    logger.info(`escuchando puerto: ${puerto}`)
 })
 const socketServer = new Server(httpServer)
 
@@ -115,7 +119,7 @@ app.get("/",async(req,res)=>{
         }
     }
     catch(error){
-        console.log(error)
+        logger.error(error)
     }
 })
 
@@ -133,7 +137,7 @@ app.get("/cookie", async(req,res)=>{
 
 
 socketServer.on("connection", socket =>{
-    console.log("nuevo usuario conectado")
+    logger.info("nuevo usuario conectado")
 })
 socketProduct(socketServer)
 chatSocket(socketServer)

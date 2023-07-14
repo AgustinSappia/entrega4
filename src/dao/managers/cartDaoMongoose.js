@@ -4,7 +4,8 @@ const uniqueCode = uuidv4();
 const {cartsModel} = require("../models/carts.model")
 const { productsModel } = require("../models/product.model")
 const { ticketModel } = require("../models/ticket.model")
-const ProductManager = require("./productDaoMongoose")
+const ProductManager = require("./productDaoMongoose");
+const { logger } = require('../../config/logger');
 const productManager = new ProductManager()
 
 class CartDaoMongo{
@@ -15,17 +16,17 @@ async getCarts(){
             return await cartsModel.find()
         }
     catch(error){
-        console.log(error)
+        logger.error(error)
      }
 }
 
 async createCart(){
     try{
-        console.log("carrito creando")
+        logger.info("carrito creado")
         return await cartsModel.create({products:[]})
     }
     catch(error){ 
-    console.log(error)
+    logger.error(error)
     }
 }
 
@@ -33,7 +34,7 @@ async searchCartById(id){
     try{
        let cart= await cartsModel.findOne({_id:id}).lean().populate("products.product")
        if(!cart){
-        return console.log("el carrito no existe")
+        return logger.warning("el carrito no existe")
        }
        else{
            return cart
@@ -81,7 +82,7 @@ async addProduct(cid,pid,cantidadAgregado){
 
     }
     catch(error){
-        console.log(error)
+        logger.error(error)
     }
 }
 
@@ -105,7 +106,7 @@ async putProduct(cid,pid,update){
          }
     }
     catch(error){
-        console.log(error)
+        logger.error(error)
         return error
     }
 }
@@ -200,7 +201,7 @@ async pucharseCart(cid,client){
         
     }
     catch(error){
-        console.log(error)
+        logger.error(error)
         throw error //throw error se utiliza en el bloque catch para lanzar la excepción capturada hacia arriba y permitir que sea manejada en un nivel superior
     }
 }

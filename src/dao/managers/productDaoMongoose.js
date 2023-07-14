@@ -1,6 +1,7 @@
 
 const fs = require("fs")
 const {productsModel} = require("../models/product.model")
+const { logger } = require("../../config/logger")
 let products=[]
 class ProductDaoMongo{
 
@@ -70,7 +71,7 @@ async updateProduct(id,update){
     return await productsModel.updateOne({_id:id},update)
   }
   catch(error){
-    console.log(error)
+    logger.error(error)
   }
   
 }

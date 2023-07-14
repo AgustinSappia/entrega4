@@ -1,8 +1,9 @@
+const { logger } = require("../../config/logger");
 const { EError } = require("../../utils/CustomError/EErrors");
 
 exports.errorHandler = (error,req,res,next)=>{
 
-    console.log(error.cause)
+    logger.error(error.cause)
     switch (error.code){
         case EError.INVALID_TYPE_ERROR:
             return res.send({status: "NoTypeError",error:error.name})

@@ -1,4 +1,5 @@
 const mongoose = require ("mongoose")
+const { logger } = require("../config/logger")
 require("dotenv").config()
 
 const url = process.env.MONGO_URL
@@ -14,11 +15,11 @@ class MongoSingleton{
     }
     static getInstance(){
         if(this.#instance){
-            console.log("Base de datos ya esta creada")
+            logger.info("Base de datos ya esta creada")
             return this.#instance
         }
         this.#instance = new MongoSingleton()
-        console.log("base de dato conectada")
+        logger.info("base de dato conectada")
         return this.#instance
     }
 }

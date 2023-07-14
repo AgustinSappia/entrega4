@@ -3,6 +3,7 @@ const local = require("passport-local")
 const { userModel } = require("../dao/models/user.model")
 const { createHash, isValidPassword } = require("../utils/bcryptHash")
 const githubStrategy= require("passport-github2")
+const { logger } = require("./logger")
 require("dotenv").config()
 
 
@@ -58,7 +59,7 @@ const initPassport = () =>{
                 return done(null,userDB)
             }
             catch(error){
-                console.log("error en el strategy login")
+                logger.error("error en el strategy login")
             }
         }
         
@@ -88,7 +89,7 @@ const initPassportGithub = ()=>{
             return done(null,user)
         }
         catch(error){
-            console.log(error)
+            logger.error(error)
         }
 
     }))

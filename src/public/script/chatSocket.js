@@ -1,3 +1,4 @@
+const { logger } = require("../../config/logger")
 const { chatsModel } = require("../../dao/models/chats.models")
 
 
@@ -9,7 +10,7 @@ const chatSocket = (io)=>{
         socket.on("message",data=>{
             chatsModel.create(data)     //guardo la info con mongoose
             messages.push(data)
-            console.log(messages)
+            logger.info(messages)
             io.emit("messageLogs",messages)
         })
         socket.on("usuario",data=>{

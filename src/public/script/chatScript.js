@@ -1,6 +1,7 @@
+const { logger } = require("../../config/logger")
 
 const socket = io()
-console.log("este es el script")
+logger.info("este es el script")
 let user
 let chatBox = document.getElementById("chatbox")
 Swal.fire({

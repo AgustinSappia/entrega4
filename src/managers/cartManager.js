@@ -1,6 +1,7 @@
 let carts=[]
 let products=[]
 const fs = require("fs")
+const { logger } = require("../config/logger")
 class CartManager{
     constructor(path){ 
         this.path = path
@@ -18,7 +19,7 @@ async GetCarts(){
             return "[]"});
             return await JSON.parse(data)}
     catch(error){
-        console.log(error)
+        logger.error(error)
      }
 }
 
@@ -34,7 +35,7 @@ async createCart(products){
         return cartsJson
     }
     catch(error){ 
-    console.log(error)
+    logger.error(error)
     }
 }
 
@@ -46,7 +47,7 @@ async searchCartById(id){
         return carrito
     }
     catch(error){
-        console.log("el carrito no existe"+error)
+        logger.warning("el carrito no existe"+error)
         return false
     }
 }
@@ -73,7 +74,7 @@ async addProduct(product,cart){
         return carts[index]
     }
     catch(error){
-        console.log(error)
+        logger.error(error)
     }
 }
 

@@ -1,5 +1,6 @@
 const {Router} = require ("express")
 const jwt = require("jsonwebtoken")
+const { logger } = require("../config/logger")
 
 class RouterClass{
 
@@ -19,7 +20,7 @@ class RouterClass{
                 try {
                     await callback.apply(this, params)
                 } catch (error) {
-                    console.log(error)
+                    logger.error(error)
                     params[1].status(500).send(error)
                 }
         })

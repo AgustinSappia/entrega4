@@ -17,7 +17,7 @@ router.get("/aleatorio", async(req,res)=>{
         res.render("index", testUser)
     }
     catch(error){
-        console.log(error)
+        req.logger.error(error)
     }
 })
 
@@ -30,7 +30,7 @@ router.get("/prodStatic", async(req,res)=>{
         res.render("estatico",{productos})
     }
     catch(error){
-        console.log(error)
+        req.logger.error(error)
     }
 } )
 
@@ -39,7 +39,7 @@ router.get("/productosSocket",async (req,res)=>{
         res.render("productosSocket")
     }
     catch(error){
-        console.log(error)
+        req.logger.error(error)
     }
 
 })

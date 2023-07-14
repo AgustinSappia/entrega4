@@ -54,7 +54,8 @@ class ProductsController{
         }
     }
     catch(error){
-        console.log(error).status(500)
+        req.logger.error(error)
+        res.send(error)
     }
 }
 

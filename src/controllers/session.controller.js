@@ -100,7 +100,7 @@ class SessionController{
             }
             
     
-            console.log(newUser)
+            req.logger.info(newUser)
             
             let resultUser = await userModel.create(newUser)
     

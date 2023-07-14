@@ -1,5 +1,6 @@
 
 const fs = require("fs")
+const { logger } = require("../config/logger")
 let products=[]
 class ProductManager{
 
@@ -84,7 +85,7 @@ async updateProduct(id,update){
     return 'Producto Actualizado'
   }
   catch(error){
-    console.log(error)
+    logger.error(error)
   }
   
 }

@@ -1,5 +1,7 @@
+const { logger } = require("../../config/logger")
+
 function auth(req,res,next){
-    console.log("auth", req.session)
+    logger.info("auth", req.session)
 
     next()
 }

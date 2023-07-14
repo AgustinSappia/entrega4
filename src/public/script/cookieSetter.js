@@ -1,5 +1,6 @@
+const { logger } = require("../../config/logger")
 
-console.log("conectado")
+logger.info("conectado")
 const form = document.getElementById("login2")
 
 form.addEventListener("submit",(e)=> { 
@@ -18,18 +19,18 @@ form.addEventListener("submit",(e)=> {
     .then(respuesta => respuesta.json())
     .then(respuesta =>{
         if(respuesta.status==="error"){
-            console.log(respuesta)
+            logger.info(respuesta)
         }
         else{
-        console.log("logueo exitoso")
+            logger.info("logueo exitoso")
         localStorage.setItem("authToken", respuesta.token)
         }
     })
-    .catch(respuesta => console.log(respuesta))
+    .catch(respuesta => logger.info(respuesta))
    
  })
 
  const getCookies = ()=>{
-    console.log(document.cookie)
+    logger.info(document.cookie)
  }
  
