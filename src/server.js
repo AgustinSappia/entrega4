@@ -18,10 +18,13 @@ const mockRouter = require("./routes/mock.router")
 const loggerTestRouter = require("./routes/loggerTest")
 const usersRouter= new UserRouter()
 //_________________________________________________________________________________
-const {Server}= require("socket.io")
+const {Server: serverHTTP} = require("http") 
+const {Server: ServerIO}= require("socket.io")
 const cookieParser = require("cookie-parser")
 const MongoStore = require("connect-mongo")
 let app = express()
+const serverHttp = serverHTTP(app)
+const socketServer = new ServerIO(serverHttp)
 
 
 
@@ -80,19 +83,15 @@ app.use(addLogger)
 
 
 //puerto
-const httpServer = app.listen(puerto,()=>{
-    
-    logger.info(`escuchando puerto: ${puerto}`)
-})
-const socketServer = new Server(httpServer)
+//const socketServer = new Server(httpServer)
 
 //_________________________________________________________________________________________
 
 
 
 // app.use(session({
-//     store:MongoStore.create({
-//         mongoUrl:"mongodb+srv://agustinsappia12:Dni42206141@cluster0.uvoardd.mongodb.net/?retryWrites=true&w=majority",
+    //     store:MongoStore.create({
+        //         mongoUrl:"mongodb+srv://agustinsappia12:Dni42206141@cluster0.uvoardd.mongodb.net/?retryWrites=true&w=majority",
 //         mongoOptions:{useNewUrlParser:true, useUnifiedTopology:true},
 //         ttl:300
 //     }),
@@ -128,9 +127,9 @@ app.get("/",async(req,res)=>{
 
 
 app.get("/cookie", async(req,res)=>{
-
+    
     res.cookie("CookieHacker","Ten mucho cuidado forastero",{maxAge:10000,signed:true}).send({msj:"Probamos cookies",cookieCreada:await req.cookies})
-
+    
 })
 
 
@@ -161,3 +160,9 @@ app.use("/loggerTest",loggerTestRouter)
 
 
 app.use(errorHandler)
+
+serverHttp.listen(puerto,()=>{
+    logger.info(`escuchando puerto: ${puerto}`)
+})
+
+
