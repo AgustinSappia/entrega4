@@ -55,4 +55,16 @@ router.get("/cambiarPass/:token",async(req,res)=>{
 
 })
 
+router.get("/crearproducto",async(req,res)=>{
+    try{
+    res.render("crearProducto")
+    }
+    catch (error){
+        res.send(error)
+    }
+
+
+})
+
+
 module.exports=router

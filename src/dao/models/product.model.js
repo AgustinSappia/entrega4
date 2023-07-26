@@ -10,7 +10,11 @@ const productsSchema= new mongoose.Schema({
     thumbnail: String,
     code: String,
     stock: Number,
-    status: Boolean
+    status: Boolean,
+    owner:{
+        type: mongoose.Schema.Types.String,
+        ref: "users",
+    }
 })
 
 productsSchema.plugin(mongoosePaginate)     // envio paginate

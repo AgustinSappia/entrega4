@@ -27,3 +27,24 @@ error: undefined
 error: undefined
 error: undefined
 error: undefined
+error: One or more properties ware incomplete or not valid.
+        listado de requirimientos de propiedades del user:
+        * title: needs to a String, received undefined
+        * price: needs to a number, received 123
+        * code: needs to a number, received 4040
+        * thumbnail: needs to a string, received undefined
+        * description: needs to a string, received peru
+error: One or more properties ware incomplete or not valid.
+        listado de requirimientos de propiedades del user:
+        * title: needs to a String, received undefined
+        * price: needs to a number, received 123
+        * code: needs to a number, received 49049
+        * thumbnail: needs to a string, received undefined
+        * description: needs to a string, received peru
+error: One or more properties ware incomplete or not valid.
+        listado de requirimientos de propiedades del user:
+        * title: needs to a String, received peru
+        * price: needs to a number, received 321
+        * code: needs to a number, received 1235
+        * thumbnail: needs to a string, received undefined
+        * description: needs to a string, received petu

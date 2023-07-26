@@ -16,7 +16,7 @@ const cartManager = new CartDaoMongo()
 
 
 
-router.get("/",passportCall("jwt"),authorization("admin"),sessionController.getSession)
+router.get("/",passportCall("jwt"),authorization(["admin"]),sessionController.getSession)
 
 
 //LOGIN
@@ -127,7 +127,7 @@ router.post("/cambiarpass",sessionController.cambiarPass)
 
 router.get("/logout",passportCall("jwt"),sessionController.logout)
 
-router.get("/current", passportCall("jwt"),authorization("admin") , sessionController.current)
+router.get("/current", passportCall("jwt"),authorization(["admin"]) , sessionController.current)
 
 
 

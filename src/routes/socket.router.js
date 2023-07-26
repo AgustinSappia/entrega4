@@ -44,7 +44,7 @@ router.get("/productosSocket",async (req,res)=>{
 
 })
 
-router.get("/chatSocket", passportCall("jwt"),authorization("user"),(req,res)=>{
+router.get("/chatSocket", passportCall("jwt"),authorization(["user"]),(req,res)=>{
     res.render("chatSocket")
 })
 

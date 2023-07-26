@@ -1,0 +1,46 @@
+<div>
+    <form id="productForm">
+        <label for="title">tittle:</label><input type="text" name="title" id="title">
+        <label for="description">description:</label><input type="text" name="description" id="description">
+        <label for="price">price:</label><input type="text" name="price" id="price">
+        <label for="code">code:</label><input type="text" name="code" id="code">
+        <label for="stock">stock:</label><input type="number" name="stock" id="stock">
+        <label for="thumbnail">thumbnail:</label><input type="text" name="thumbnail" id="thumbnail">
+        <button type="submit">enviar</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('productForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const productData = {
+            title: formData.get('title'),
+            description: formData.get('description'),
+            price: formData.get('price'),
+            code: formData.get('code'),
+            stock: formData.get('stock'),
+            thumbnail: formData.get('thumbnail')
+        };
+
+        try {
+            const response = await fetch('/api/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(productData)
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data); // Respuesta del servidor
+            } else {
+                console.log('Error al enviar el formulario, no autorizado');
+            }
+        } catch (error) {
+            console.log('Error en la solicitud:', error);
+        }
+    });
+</script>

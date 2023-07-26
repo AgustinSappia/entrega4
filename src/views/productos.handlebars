@@ -7,6 +7,7 @@
             <hr>
             <a href="/pruebas/mail"><button>mail</button></a>
             <a href="/api/message/chatSocket"><button>chat</button></a>
+            <a href="/crearProducto" class="adminRol" premium="true" ><button>Crear Producto</button></a>
             {{else}}
             <h1>no ingreso usuario</h1>
         {{/if}}
@@ -16,7 +17,8 @@
                 <strong>id: </strong>{{this._id}}
                 <strong>price:</strong>{{this.price}}
                 <strong>stock:</strong>{{this.stock}}
-                <button class="userRol" data-id="{{this.id}}">agregar al carrito</button>
+                <button class="adminRol" data-id="{{this.id}}" data-class= "botonDelete" data-owner="{{this.owner}}">eliminar Producto</button>
+                <button class="userRol" data-id="{{this.id}}" data-class= "botonCompra" data-owner="{{this.owner}}">agregar al carrito</button>
 
             </li>
         {{/each}}
@@ -50,15 +52,47 @@
 
 <script>
 var userRol = "{{session.user.rol}}"
-console.log(userRol)
+let userMail="{{session.user.email}}"
 document.addEventListener("DOMContentLoaded",function(){
     let elementosParaUsers = document.getElementsByClassName("userRol")
     let elementosParaAdmins= document.getElementsByClassName("adminRol")
+    let elementosParaPremium= document.querySelectorAll(`[premium ="true"]`)
     let elementoCID= document.getElementById("cart-id")
+    let botonesCompra = document.querySelectorAll(`[data-class= "botonCompra"]`)
+    let botonesDelete = document.querySelectorAll(`[data-class= "botonDelete"]`)
+
+    console.log(elementosParaPremium)
 
     let CID = elementoCID.textContent.split(":")[1].trim() //e utiliza split(":") para dividir el contenido de texto en dos partes, separadas por el ":". Luego, se accede a la segunda parte utilizando [1], que corresponde al número "id" en este caso. Se utiliza trim() para eliminar cualquier espacio en blanco adicional alrededor del número.
    
+    for(let i = 0; i < elementosParaAdmins.length; i++){
+
+        if (userRol !=="admin"){
+             elementosParaAdmins[i].style.display="none"
+        }
+
+    }
+
+        for(let i = 0; i < elementosParaPremium.length; i++){
+
+        if (userRol ==="premium"){
+             elementosParaAdmins[i].style.display="block"
+
+
+
+             
+        }
+
+    }
+
+ 
+
+
+
     for(let i = 0; i < elementosParaUsers.length; i++){
+         
+
+         
         if(userRol == "user"){
                   elementosParaUsers[i].addEventListener("click", function(){
             let objetoId = this.getAttribute("data-id")
@@ -70,13 +104,29 @@ document.addEventListener("DOMContentLoaded",function(){
             elementosParaUsers[i].style.display = "none"
         }
     }
-    for(let i = 0; i < elementosParaAdmins.length; i++){
+            console.log(userMail)
 
-        if (userRol !=="admin"){
-             elementosParaAdmins[i].textContent = ""
+        
+
+    if (userRol ==="premium"){ //manejo del posicionamiento de los botones en premiun, FALTA OPTIMIZAR
+
+        for(let i = 0; i < botonesCompra.length; i++){        //maneja los botones del rol premium
+            console.log(botonesCompra[i].getAttribute("data-owner"))
+            if(botonesCompra[i].getAttribute("data-owner") !== userMail){
+                botonesCompra[i].style.display="block"
+            }
+
         }
 
+        for(let i = 0; i < botonesDelete.length; i++){        //maneja los botones del rol premium
+            console.log(botonesDelete[i].getAttribute("data-owner"))
+            if(botonesDelete[i].getAttribute("data-owner") == userMail){
+                botonesDelete[i].style.display="block"
+            }
+
+        }
     }
+
 
 })
 

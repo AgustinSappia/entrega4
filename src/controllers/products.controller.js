@@ -80,14 +80,18 @@ class ProductsController{
 
  postProduct =async (req,res,next)=>{    //
     try{
+        let ValueOwner = req.user.email
         let newProduct = await req.body
+        newProduct.owner = !ValueOwner? "admin" : ValueOwner
+        
+        console.log(newProduct)
         // let{title,description,price,thumbnail,code,stock} = newProduct
         if(!newProduct.title || !newProduct.description || !newProduct.price || !newProduct.thumbnail || !newProduct.code || !newProduct.stock){
 
             CustomError.createError({
                 name:"User creation error",
                 cause: generatePoductErrorInfo(newProduct),
-                message: "Error trying to create user",
+                message: "Error trying to create product",
                 code:EError.INVALID_TYPE_ERROR
             })
         }
