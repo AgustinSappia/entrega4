@@ -122,6 +122,8 @@ router.post("/register",sessionController.register)
 
 
 //LOGOUT
+router.post("/recuperarpass",sessionController.enviarMail)
+router.post("/cambiarpass",sessionController.cambiarPass)
 
 router.get("/logout",passportCall("jwt"),sessionController.logout)
 

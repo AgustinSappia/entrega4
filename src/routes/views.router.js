@@ -30,4 +30,29 @@ router.get("/register",async(req,res)=>{
 
 })
 
+//RECUPERAR PASS
+
+router.get("/recuperarpass",async(req,res)=>{
+    try{
+    res.render("recuperarpass",{})
+    }
+    catch (error){
+        res.send(error)
+    }
+
+
+})
+
+router.get("/cambiarPass/:token",async(req,res)=>{
+    try{
+        const {token}=req.params 
+    res.render("cambiarPass",{token})
+    }
+    catch (error){
+        res.send(error)
+    }
+
+
+})
+
 module.exports=router

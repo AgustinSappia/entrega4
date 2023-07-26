@@ -5,7 +5,7 @@ const { userModel } = require("../dao/models/user.model")
 
 const { createHash, isValidPassword } = require("../utils/bcryptHash")
 
-const { generateToken } = require("../utils/jwt")
+const { generateToken,generateShortToken, simpleAuth } = require("../utils/jwt")
 
 
 
@@ -13,6 +13,8 @@ const CartDaoMongo = require("../dao/managers/cartDaoMongoose")
 const { CustomError } = require("../utils/CustomError/customError")
 const { generateUserErrorInfo } = require("../utils/CustomError/info")
 const { EError } = require("../utils/CustomError/EErrors")
+const { search } = require("../routes/views.router")
+const {sendMail} = require("../utils/sendMail")
 
 
 const cartManager = new CartDaoMongo()
@@ -112,6 +114,65 @@ class SessionController{
         }
         catch(error){
             next(error)
+        }
+    }
+
+
+    enviarMail = async(req,res,next)=>{
+
+        try {
+            let mail = req.body
+            let search = await userModel.findOne(mail)
+    
+            if(!search){
+                res.send("el mail no existe")
+            }
+            else{
+                let token = await generateShortToken(mail)
+                sendMail(mail.email,"recuperar cuenta",`
+                <div>
+                    <h1>hola</h1>
+                    <p>si deseas cambiar el pass </p><a href="http://localhost:8080/cambiarPass/${token}">ingresa aqui</a>
+                </div>
+                `)
+    
+               
+                res.cookie("shortTokenCookie",token,{
+                    maxAge: 60*60*100,
+                    httpOnly:true
+                }).send("mail enviado")
+
+            }
+            
+        } catch (error) {
+            next(error)
+        }
+
+
+
+    }
+
+    cambiarPass = async (req,res,next)=>{
+        try {
+
+            let info = req.body
+            let pass=req.body.pass1
+            let auth =simpleAuth(info.token)
+           if( !auth){
+                res.send({error:"expirado"})
+           }
+           let email = auth.user.email
+           let user = await userModel.findOne({email:email})
+           if(isValidPassword(user,pass)){
+                res.send({error:"same password"})
+           }
+           else{
+               let result = await userModel.findOneAndUpdate({email:email},{password:createHash(pass)})
+                res.send({resultado:result, message:"pass cambiada con exito"})
+
+           }                
+        } catch (error) {
+          console.log(error)
         }
     }
 

@@ -1,0 +1,49 @@
+<div>
+    <form id="passwordForm" data-token="{{token}}">
+        <label for="">Ingresa la nueva contraseña<input type="text" name="pass1"></label>
+        <label for="">repítela de nuevo<input type="text" name="pass2"></label>
+        <button type="submit">cambiar</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('passwordForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const pass1 = this.pass1.value;
+        const pass2 = this.pass2.value;
+        const token = this.getAttribute('data-token');
+        
+        if (pass1 !== pass2) {
+            console.log("los datos no coinciden");
+        } else {
+            fetch(`/api/session/cambiarpass`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ pass1, token })
+            })
+                .then(response => response.json())
+                .then(data =>{ 
+                    if(!data.error){
+                    console.log(data)
+                    alert("password changed")
+                    window.location.href=`/`
+                    }
+                    else{
+                        if(data.error === "same password"){
+                            console.log(data)
+                            alert("no puede poner el mismo pass que ya poseeia")
+                        }
+                        else{
+                            console.log(data)
+                            alert("exiprado!, intenta de nuevo")
+                            window.location.href=`/`
+                        }
+
+                    }
+                    })
+                .catch(error => console.log("te odio"+error));
+        }
+    });
+</script>

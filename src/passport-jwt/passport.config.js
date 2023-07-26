@@ -23,7 +23,6 @@ const initPassport = () => {
             return done (null, jwt_payload)
         }
         catch(err){
-           
             return done(err)
         }
     }))
