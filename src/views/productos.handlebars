@@ -3,6 +3,7 @@
         {{#if session.user}}
             <H1>bienvenido {{session.user.first_name}}</H1>
             <h2>tu rol es : {{session.user.rol}}</h2>
+            <h3>tu id es: {{session.user}}</h3>
             <form action="/api/session/logout" method="GET"><button>Logout</button></form>
             <hr>
             <a href="/pruebas/mail"><button>mail</button></a>

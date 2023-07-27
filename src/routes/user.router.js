@@ -3,7 +3,10 @@ const { userModel } = require("../dao/models/user.model")
 
 const router = Router()
 
-
+router.get("/",async(req,res)=>{
+    users = await userModel.find({})
+    res.send(users)
+})
 
 router.get("/premium/:uid", async(req,res)=>{
     try {
