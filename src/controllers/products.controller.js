@@ -84,7 +84,7 @@ class ProductsController{
         let newProduct = await req.body
         newProduct.owner = !ValueOwner? "admin" : ValueOwner
         
-        console.log(newProduct)
+
         // let{title,description,price,thumbnail,code,stock} = newProduct
         if(!newProduct.title || !newProduct.description || !newProduct.price || !newProduct.thumbnail || !newProduct.code || !newProduct.stock){
 

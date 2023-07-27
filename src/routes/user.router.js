@@ -20,13 +20,10 @@ router.get("/premium/:uid", async(req,res)=>{
 
 router.post("/premium/:uid", async (req,res,next) => {
     try {
-      console.log("aidua");
       let { uid } = req.params;
       // Eliminar las comillas del valor uid
       uid = uid.replace(/['"]+/g, '');
       let {value} = req.body;
-      console.log(value);
-      console.log(uid);
       let user = await userModel.findOne({_id:uid})
       if(!user){
         res.send(JSON.stringify({error:"no found user"}));

@@ -1,6 +1,6 @@
 const authorization = roles => {
     return async (req, res, next) => {
-        console.log(roles);
+
         if (!req.user) return res.status(401).send({ status: "error", error: "Unauthorized" });
 
         // Verificar si el rol del usuario está incluido en el array de roles permitidos
