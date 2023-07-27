@@ -1,0 +1,30 @@
+<h1>hola premium {{uid}}</h1>
+
+<button onclick="changeRol('{{uid}}', 'true')">cambiar a premium</button>
+<button onclick="changeRol('{{uid}}', 'false')">cambiar a user</button>
+
+<script>
+async function changeRol(uid, value) {
+  try {
+    const url = `/api/user/premium/${uid}`;
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ value: value }),
+    };
+
+    const response = await fetch(url, options);
+    const data = await response.json();
+    if(data.status=="error"){
+        console.log({error:"el usuario no existe"})
+    }
+    else{
+        console.log(data)
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+</script>

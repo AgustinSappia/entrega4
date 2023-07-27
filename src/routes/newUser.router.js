@@ -18,6 +18,17 @@ class UserRouter extends RouterClass{
                 res.sendServerError(error)
             }
         })
+
+        this.get("/premium/:uid", async(req,res)=>{
+            try {
+            let {uid} = req.params
+           console.log("hola")
+           res.render("premium",{uid})
+            } catch (error) {
+                console.log(error)
+            }
+          
+        })
     }
 }
 

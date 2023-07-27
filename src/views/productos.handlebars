@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded",function(){
     let botonesCompra = document.querySelectorAll(`[data-class= "botonCompra"]`)
     let botonesDelete = document.querySelectorAll(`[data-class= "botonDelete"]`)
 
-    console.log(elementosParaPremium)
+
 
     let CID = elementoCID.textContent.split(":")[1].trim() //e utiliza split(":") para dividir el contenido de texto en dos partes, separadas por el ":". Luego, se accede a la segunda parte utilizando [1], que corresponde al número "id" en este caso. Se utiliza trim() para eliminar cualquier espacio en blanco adicional alrededor del número.
    
@@ -104,14 +104,13 @@ document.addEventListener("DOMContentLoaded",function(){
             elementosParaUsers[i].style.display = "none"
         }
     }
-            console.log(userMail)
+
 
         
 
     if (userRol ==="premium"){ //manejo del posicionamiento de los botones en premiun, FALTA OPTIMIZAR
 
         for(let i = 0; i < botonesCompra.length; i++){        //maneja los botones del rol premium
-            console.log(botonesCompra[i].getAttribute("data-owner"))
             if(botonesCompra[i].getAttribute("data-owner") !== userMail){
                 botonesCompra[i].style.display="block"
             }
@@ -119,7 +118,6 @@ document.addEventListener("DOMContentLoaded",function(){
         }
 
         for(let i = 0; i < botonesDelete.length; i++){        //maneja los botones del rol premium
-            console.log(botonesDelete[i].getAttribute("data-owner"))
             if(botonesDelete[i].getAttribute("data-owner") == userMail){
                 botonesDelete[i].style.display="block"
             }
