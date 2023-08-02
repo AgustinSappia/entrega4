@@ -16,6 +16,7 @@ router.get("/",passport.authenticate("jwt",{session:false}),getProducts)
 router.get("/:pid",passportCall("jwt"),getProductId)
 
 router.post("/", passportCall("jwt"),authorization(["admin","premium"]),postProduct)
+//router.post("/",postProduct)
 
 
 //PUT

@@ -29,6 +29,12 @@ const socketServer = new ServerIO(serverHttp)
 
 
 
+//swagger 
+
+const swaggerJsDoc = require("swagger-jsdoc")
+const swaggerUiExpress= require("swagger-ui-express")
+
+
 //mongoo prueba
 const objetConfigs = require("./config/objetConfigs")
 objetConfigs.connectDb()
@@ -132,6 +138,22 @@ app.get("/cookie", async(req,res)=>{
     res.cookie("CookieHacker","Ten mucho cuidado forastero",{maxAge:10000,signed:true}).send({msj:"Probamos cookies",cookieCreada:await req.cookies})
     
 })
+
+
+//swagger config
+const swaggerOptions = {
+    definition:{
+        openapi: "3.0.1",
+        info:{
+            title:"Bienvenido",
+            description:"esta es una interfaz de prueba en la cual estoy intentando implementar swagger al proyecto, las peticiones funcionan pero por el momento no es posible autenticar cada una de ellas"
+        }
+    },
+   
+    apis: [`${__dirname}/docs/**/*.yaml`]
+}
+const specs= swaggerJsDoc(swaggerOptions)
+app.use("/docs",swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 
 
 

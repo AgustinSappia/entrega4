@@ -80,10 +80,10 @@ class ProductsController{
 
  postProduct =async (req,res,next)=>{    //
     try{
+        console.log("error")
         let ValueOwner = req.user.email
         let newProduct = await req.body
         newProduct.owner = !ValueOwner? "admin" : ValueOwner
-        
 
         // let{title,description,price,thumbnail,code,stock} = newProduct
         if(!newProduct.title || !newProduct.description || !newProduct.price || !newProduct.thumbnail || !newProduct.code || !newProduct.stock){
@@ -99,6 +99,7 @@ class ProductsController{
         res.status(200).send({newProduct})
     }
     catch(error){
+        console.log(error)
         next(error)
     }
 }

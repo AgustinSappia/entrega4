@@ -1,0 +1,135 @@
+paths:
+  /api/Cart:
+    get:
+      summary: Obtiene todos los Carts
+      tags:
+        - Cart
+      responses:
+        "200":
+          description: el cart fue obtenido correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Cart"
+        "500":
+          description: Error interno del server, usualmente generado por una query defectuosa
+        "400":
+          description: Error del usuario  
+    post:
+      summary: Crea un nuevo Cart
+      tags:
+        - Cart
+      responses:
+        "200":
+          description: el Cart fue creado correctamente
+        "500":
+          description: Error interno del server, usualmente generado por una query defectuosa
+        "400":
+          description: Error del usuario       
+  /api/cart/{cid}:
+    get:
+      summary: Obtiene un Cart por su id
+      tags:
+        - Cart
+      parameters:
+      - name: cid
+        in: path
+        required: true
+        description: el id del Cart a solicitar
+        schema:
+          $type: string
+      responses:
+        "200":
+          description: el cart fue obtenido correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Cart"
+        "500":
+          description: Error interno del server, usualmente generado por una query defectuosa
+        "400":
+          description: Error del usuario  
+    put:
+      summary: se actualiza un car en base a su cid
+      tags:
+        - Cart
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: el cid del cart que desea actualizar
+          schema:
+            type: string  
+      requestBody:
+        required: true        
+        content: 
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/updateCart"
+      responses:
+        "200":
+          description: el cart fue enviado correctamente
+        "500":
+          description: Error interno del server, usualmente generado por una query defectuosa
+        "400":
+          description: Error del usuario
+    delete:
+      summary: elemina un Cart por su id
+      tags:
+        - Cart
+      parameters:
+      - name: cid
+        in: path
+        required: true
+        description: el id del Cart a eliminar
+        schema:
+          $type: string
+      responses:
+        "200":
+          description: el Cart fue eliminado correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Cart"
+        "500":
+          description: Error interno del server, usualmente generado por una query defectuosa
+        "400":
+          description: Error del usuario
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id: 
+          type: string
+          description: Id autogenerado por mongo
+        products:
+          type: array
+          description: Array con ids de productos pertenecientes al cart
+      example:
+        _id: ObjectId("fasdfd5as4dg.as56d4fg")
+        products: "[product: { ObjectId(asdfew5634das89cerqwe45) } ]"
+          
+        
+
+
+
+  requestBodies:
+    updateCart:
+      type: object
+      properties:
+        _id: 
+          type: string
+          description: Id autogenerado por mongo
+        products:
+          type: array
+          description: Array con ids de productos pertenecientes al cart
+      example:
+        _id: ObjectId("fasdfd5as4dg.as56d4fg")
+        products: ["product: { ObjectId(asdfew5634das89cerqwe45) } "]

@@ -1,0 +1,201 @@
+paths:
+  /api/products:
+    get:
+      summary: Obtiene todos los Productos
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Los productos fueron obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Products"
+        "500":
+          description: Error interno del server, usualmente generado por una query defectuosa
+        "400":
+          description: Error del usuario  
+    post:
+      summary: Crea un nuevo producto
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/updateProduct"
+      responses:
+        "200":
+          description: el producto fue enviado correctamente
+        "500":
+          description: Error interno del server, usualmente generado por una query defectuosa
+        "400":
+          description: Error del usuario       
+  /api/products/{pid}:
+    get:
+      summary: Obtiene un producto por su id
+      tags:
+        - Products
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: el id del producto a solicitar
+        schema:
+          $type: string
+      responses:
+        "200":
+          description: el producto fue obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Products"
+        "500":
+          description: Error interno del server, usualmente generado por una query defectuosa
+        "400":
+          description: Error del usuario  
+    put:
+      summary: se actualiza un producto en base a su pid
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: el pid del producto que desea actualizar
+          schema:
+            type: string  
+      requestBody:
+        required: true        
+        content: 
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/updateProduct"
+      responses:
+        "200":
+          description: el producto fue enviado correctamente
+        "500":
+          description: Error interno del server, usualmente generado por una query defectuosa
+        "400":
+          description: Error del usuario
+    delete:
+      summary: elemina un producto por su id
+      tags:
+        - Products
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: el id del producto a eliminar
+        schema:
+          $type: string
+      responses:
+        "200":
+          description: el producto fue eliminado correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Products"
+        "500":
+          description: Error interno del server, usualmente generado por una query defectuosa
+        "400":
+          description: Error del usuario
+components:
+  schemas:
+    Products:
+      type: object
+      properties:
+        _id: 
+          type: string
+          description: Id autogenerado por mongo
+        title: 
+          type: string
+          description: Nombre del producto
+        price: 
+          type: number
+          description: precio del producto
+        description: 
+          type: string
+          description: descripcion del producto
+        thumbnail: 
+          type: string
+          description: url de la imagen del producto          
+        code: 
+          type: string
+          description: codigo que identifica al producto
+        stock: 
+          type: number
+          description: cantidad de productos disponibles         
+        status: 
+          type: boolean
+          description: muestra si el producto esta activo
+        owner: 
+          type: string
+          description: muestra el id del propietario del producto
+      example:
+        _id: ObjectId("fasdfd5as4dg.as56d4fg")
+        title: Producto de ejemplo
+        price:  57
+        description: este es un produto de ejemplo
+        thumbnail: https://cdn.pixabay.com/photo/2018/10/21/08/44/background-image-3762450_1280.jpg
+        code: asd1752
+        stock: 29
+        status: true
+        owner: ObjectId("dasxcxjyhgt6asdasd564e")
+  requestBodies:
+    updateProduct:
+      type: object
+      properties:
+        title: 
+          type: string
+          description: Nombre del producto
+        price: 
+          type: number
+          description: precio del producto
+        description: 
+          type: string
+          description: descripcion del producto
+        thumbnail: 
+          type: string
+          description: url de la imagen del producto          
+        code: 
+          type: string
+          description: codigo que identifica al producto
+        stock: 
+          type: number
+          description: cantidad de productos disponibles         
+        status: 
+          type: boolean
+          description: muestra si el producto esta activo
+        owner: 
+          type: string
+          description: muestra el id del propietario del producto
+      example:
+        title: Producto de ejemplo
+        price:  57
+        description: este es un produto de ejemplo
+        thumbnail: https://cdn.pixabay.com/photo/2018/10/21/08/44/background-image-3762450_1280.jpg
+        code: asd1752
+        stock: 29
+        status: true
+        owner: ObjectId("dasxcxjyhgt6asdasd564e")
+
+
+
+
+
+
+
+
+
+
+
+
+
