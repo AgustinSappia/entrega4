@@ -4,17 +4,25 @@ const { cartService, productService } = require("../services")
 class CartController{
 
   getCarts =  async (rec,res)=>{
+    try {
         const carritos= await cartService.getCarts()
-        res.send(carritos)
+        res.status(200).send(carritos)
+    } catch (error) {
+        res.status(500).send(error)
+    }
+
     }
 
 
 
 postCarrito = async(req,res)=>{
     try{
-        res.send(await cartService.createCart())
+        let cart = await cartService.createCart()
+
+        res.send(cart)
     }
     catch(error){
+        console.log(error)
     res.status(500).send("Todo mal")
 }
 }
@@ -27,7 +35,7 @@ getCartId = async(req,res)=>{
         res.status(404).send({status:"error", error:"404 not found"})
     }
     else{
-        res.render("cart",{products,cid}) // no sacar objeto
+        res.status(200).send(products).render("cart",{products,cid}) // no sacar objeto
     }
 
     }

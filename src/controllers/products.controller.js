@@ -67,7 +67,7 @@ class ProductsController{
             response.send("el producto no existe").status(400)
         }
         else{
-            response.send(await producto).status(200)
+            response.status(200).send(producto)
         }
         
         

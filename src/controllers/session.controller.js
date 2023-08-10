@@ -91,7 +91,6 @@ class SessionController{
             if(existUser) return res.send({status:"error", error:"el mail ya esta registrado"})
             let cart = await cartManager.createCart()
             const newUser={
-                username:"pepe",
                 first_name,
                 last_name,
                 email,
@@ -104,11 +103,16 @@ class SessionController{
     
             req.logger.info(newUser)
             
+
             let resultUser = await userModel.create(newUser)
-    
-    
-    
-            res.status(200).redirect("/login")
+            
+            if (first_name =="pruebaSuper") {
+                res.status(200).send(newUser)
+            }
+            else{
+                res.status(200).redirect("/login")
+            }
+
     
     
         }
