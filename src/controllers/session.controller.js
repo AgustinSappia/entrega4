@@ -15,6 +15,7 @@ const { generateUserErrorInfo } = require("../utils/CustomError/info")
 const { EError } = require("../utils/CustomError/EErrors")
 const { search } = require("../routes/views.router")
 const {sendMail} = require("../utils/sendMail")
+const { logger } = require("../config/logger")
 
 
 const cartManager = new CartDaoMongo()
@@ -53,10 +54,11 @@ class SessionController{
                 email: search.email,
                 rol: search.rol,
                 age:search.age,
-                cart:search.cart
+                cart:search.cart,
+                lastConection: new Date()
             }    
             let token = generateToken(user)
-    
+            await userModel.updateOne({email:email},{lastConection: new Date()})  //hacemos el update para que se guarde la last connection
                
                 res.cookie("tokenCookie",token,{
                     maxAge: 60*60*10000,
@@ -97,7 +99,9 @@ class SessionController{
                 password: createHash(password),
                 age,
                 cart: cart._id,
-                rol:"user"
+                rol:"user",
+                lastConection: "",
+                documents: []
             }
             
     
@@ -183,15 +187,18 @@ class SessionController{
 
     logout = async(req,res)=>{
         try{
+
+            let usuario = req.user
+            usuario.lastConection = new Date()
+            await userModel.updateOne({email:usuario.email},usuario)
+            logger.info("usuario Desconectado")
+            res.clearCookie("tokenCookie").redirect("/")
     
-            res.clearCookie("tokenCookie")
-    
-            res.redirect("/")
     
     
         }
         catch(error){
-     
+            console.log(error)
             res.send(error)
         }
     }

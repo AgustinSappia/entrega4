@@ -112,3 +112,51 @@ error: undefined
 error: undefined
 error: undefined
 error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\ROG BY NG\\Desktop\\CoderHouse\\Programacion backend\\borrador\\entrega4\\src\\uploads\\documents\\la caja-1692391783999.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\ROG BY NG\\Desktop\\CoderHouse\\Programacion backend\\borrador\\entrega4\\src\\uploads\\documents\\la caja-1692391924371.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\ROG BY NG\\Desktop\\CoderHouse\\Programacion backend\\borrador\\entrega4\\uploads\\documents\\la caja-1692392019250.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\ROG BY NG\\Desktop\\CoderHouse\\Programacion backend\\borrador\\entrega4\\uploads\\documents\\la caja-1692392052123.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\ROG BY NG\\Desktop\\CoderHouse\\Programacion backend\\borrador\\entrega4\\uploads\\documents\\la caja-1692392065430.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\documents\\la caja-1692392090499.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\documents\\la caja-1692392092202.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\documents\\la caja-1692392093129.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\documents\\la caja-1692392112706.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\documents\\la caja-1692392165600.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\profiles\\la caja-1692392203977.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\profiles\\la caja-1692392227618.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\documents\\la caja-1692392235400.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
+error: Unexpected field {"code":"LIMIT_UNEXPECTED_FILE","field":"documentasd","name":"MulterError","storageErrors":[]}
+error: undefined
+error: Unexpected field {"code":"LIMIT_UNEXPECTED_FILE","field":"documentasd","name":"MulterError","storageErrors":[]}
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\ROG BY NG\\Desktop\\CoderHouse\\Programacion backend\\borrador\\entrega4\\uploads\\documents\\la caja-1692392644949.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\ROG BY NG\\Desktop\\CoderHouse\\Programacion backend\\borrador\\entrega4\\src\\uploads\\documents\\la caja-1692394625885.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\ROG BY NG\\Desktop\\CoderHouse\\Programacion backend\\borrador\\entrega4\\src\\uploads\\documents\\la caja-1692394679815.jpg","storageErrors":[],"syscall":"open"}
+error: undefined
