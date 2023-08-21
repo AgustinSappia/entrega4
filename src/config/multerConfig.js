@@ -1,7 +1,7 @@
 const multer = require ("multer")
 const {extname,join} = require("path")
 const FILEPATH =  join(__dirname, '..', 'uploads')
-const MIMETYPES =["image/jpeg","image/png"]
+const MIMETYPES =["image/jpeg","image/png","text/plain"]
 
 const multerUpload = multer({
     storage: multer.diskStorage({

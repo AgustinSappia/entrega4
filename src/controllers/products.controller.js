@@ -26,6 +26,7 @@ class ProductsController{
             let nextLink = "/api/products?page="+nextPage
             let prevLink ="/api/products?page="+prevPage
             let session = request.user
+            console.log(session)
             
             if(!esNumero){
                 limit=2  //si no ingresa un limite valido lo dejo en 10 que es el por defecto
