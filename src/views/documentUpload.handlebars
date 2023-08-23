@@ -1,0 +1,21 @@
+<h1>Ingreso de documentos</h1>
+<form action="/api/user/{{_id}}/documents" method="post" enctype="multipart/form-data">
+  <label for="profileImage">Imagen de perfil:</label>
+  <input type="file" name="profileImage"><br>
+  
+  <label for="productImage">Imagen de producto:</label>
+  <input type="file" name="productImage"><br>
+  
+  <label for="document1">Documento 1:</label>
+  <input type="file" name="document"><br>
+  
+  <label for="document2">Documento 2:</label>
+  <input type="file" name="document"><br>
+  
+  <label for="document3">Documento 3:</label>
+  <input type="file" name="document"><br>
+  
+  <button type="submit">Subir documentos</button>
+</form>
+<h2>Nota: tiene que subir todos los archivos al mismo tiempo</h2>
+<h3>esta en fase de pruebas, lo solucionare mas adelante</h3>

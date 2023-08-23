@@ -2,6 +2,7 @@ const {Router, json} = require("express")
 const { userModel } = require("../dao/models/user.model")
 const userController = require("../controllers/user.controller")
 const { multerUpload } = require("../config/multerConfig")
+const { passportCall } = require("../passport-jwt/passportCall")
 
 
 const router = Router()
@@ -18,7 +19,12 @@ router.post("/:uid/documents",multerUpload.fields([
     {name:"document", maxCount: 3}
 ]),userController.postDocuments )
 
+router.get("/documents",passportCall("jwt"),async(req,res)=>{
 
+    let user =await userModel.findOne({email:req.user.email})
+    console.log(user)
+    res.render("documentUpload",user)
+})
 
 
 

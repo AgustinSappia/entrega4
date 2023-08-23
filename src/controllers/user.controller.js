@@ -66,8 +66,9 @@ premiumAndUser = async (req,res,next) => {
     try {
       const {uid} = req.params
       const upload = req.files
-      // console.log(upload)
+      //console.log(upload)
       let uploaded = req.files.document.concat(req.files.profileImage,req.files.productImage)     // array con todos los archivos subidos
+      console.log(uploaded)
       let resUploaded = uploaded.map(elemento =>{   //array con los archivos resumidos
         return {
           name: elemento.filename,
@@ -80,7 +81,7 @@ premiumAndUser = async (req,res,next) => {
 
       res.sendStatus(200)
     } catch (error) {
-     console.log(error)
+     next(error)
     }
 
   }
