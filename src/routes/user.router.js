@@ -10,6 +10,7 @@ const { authorization } = require("../passport-jwt/authorizationJwtRole")
 const router = Router()
 
 router.get("/",passportCall("jwt"),authorization(["admin"]),userController.userGet)
+router.get("/detailed",passportCall("jwt"),authorization(["admin"]),userController.detailedUserGet)
 
 router.get("/premium/:uid", userController.renderPremium)
 

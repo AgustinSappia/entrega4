@@ -10,10 +10,23 @@ class UserController{
 
 userGet =  async(req,res)=>{
   const users = await userModel.find({});
-  const formattedUsers = JSON.stringify(users, null, 2); // 2 espacios de indentación para formatear
+  const resumeArray = users.map((user) => ({
+    first_name: user.first_name,
+    last_name: user.last_name,
+    rol: user.rol,
+    email: user.email,
+  }))
+  const formattedUsers = JSON.stringify(resumeArray, null, 2); // 2 espacios de indentación para formatear
   res.setHeader('Content-Type', 'application/json');
   res.status(200).send(formattedUsers);
     }
+
+  detailedUserGet = async(req,res)=>{
+    const users = await userModel.find({});
+    const formattedUsers = JSON.stringify(users, null, 2); // 2 espacios de indentación para formatear
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).send(formattedUsers);
+      }
 
 renderPremium = async(req,res)=>{
     try {
