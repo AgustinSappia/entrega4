@@ -9,6 +9,9 @@
     "test": "mocha test/Testeando.test.js",
     "superTest": "mocha test/supertest.test.js"
   },
+  "engines":{
+    "node": "18"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
