@@ -22,7 +22,7 @@ postCarrito = async(req,res)=>{
         res.send(cart)
     }
     catch(error){
-        console.log(error)
+        req.logger.error(error)
     res.status(500).send("Todo mal")
 }
 }
@@ -31,11 +31,12 @@ getCartId = async(req,res)=>{
     try{
     let {cid} = req.params
     const {products} =await cartService.searchCartById(cid)
+    req.logger.warning(JSON.stringify(products))
     if (!products){
         res.status(404).send({status:"error", error:"404 not found"})
     }
     else{
-        res.status(200).send(products).render("cart",{products,cid}) // no sacar objeto
+        res.status(200).render("cart",{products,cid}) // no sacar objeto
     }
 
     }

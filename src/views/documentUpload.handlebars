@@ -1,5 +1,5 @@
 <h1>Ingreso de documentos</h1>
-<form action="/api/user/{{_id}}/documents" method="post" enctype="multipart/form-data">
+<form id="uploadForm" enctype="multipart/form-data">
   <label for="profileImage">Imagen de perfil:</label>
   <input type="file" name="profileImage"><br>
   
@@ -15,7 +15,37 @@
   <label for="document3">Documento 3:</label>
   <input type="file" name="document"><br>
   
-  <button type="submit">Subir documentos</button>
+  <button type="button" id="uploadButton">Subir documentos</button>
 </form>
-<h2>Nota: tiene que subir todos los archivos al mismo tiempo</h2>
-<h3>esta en fase de pruebas, lo solucionare mas adelante</h3>
+<a href="/api/user/premium/{{_id}}">Cambiar rol</a>
+<h2>Nota: tiene que subir los documentos con el nombre exacto </h2>
+<h3>
+  <ul>
+    <li>Comprobante de domicilio </li>
+    <li>Comprobante de estado de cuenta</li>
+    <li>identificacion</li>
+  </ul>
+</h3>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const uploadForm = document.getElementById("uploadForm");
+  const uploadButton = document.getElementById("uploadButton");
+
+  uploadButton.addEventListener("click", async () => {
+    const formData = new FormData(uploadForm);
+    const response = await fetch(`/api/user/{{_id}}/documents`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+     window.location.href = "/api/user/premium/{{_id}}"
+    } else {
+      console.log(response)
+    }
+  });
+});
+</script>

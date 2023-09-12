@@ -1,5 +1,6 @@
 const multer = require ("multer")
 const {extname,join} = require("path")
+const { logger } = require("./logger")
 const FILEPATH =  join(__dirname, '..', 'uploads')
 const MIMETYPES =["image/jpeg","image/png","text/plain"]
 
@@ -11,10 +12,10 @@ const multerUpload = multer({
               } else if (file.fieldname === 'productImage') {
                 cb(null, join(FILEPATH, 'products'));
               } else if (file.fieldname === 'document') {
-                console.log(join(FILEPATH, 'documents'))
+                logger.info(join(FILEPATH, 'documents'))
                 cb(null, join(FILEPATH, 'documents'));
               } else {
-                console.log("invalid fieldname")
+                logger.error("invalid fieldname")
                 cb(new Error('Invalid fieldname'));
               }
         },

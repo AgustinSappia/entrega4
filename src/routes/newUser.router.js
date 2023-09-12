@@ -1,3 +1,4 @@
+const { logger } = require("../config/logger");
 const { RouterClass } = require("./RouterClass");
 
 class UserRouter extends RouterClass{
@@ -24,7 +25,8 @@ class UserRouter extends RouterClass{
             let {uid} = req.params
            res.render("premium",{uid})
             } catch (error) {
-                console.log(error)
+                logger.error(error)
+                res.send(error)
             }
           
         })

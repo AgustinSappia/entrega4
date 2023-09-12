@@ -25,7 +25,7 @@ router.put("/:pid",passportCall("jwt"),authorization(["admin"]),putProduct)
 
 //DELETE
 
-router.delete("/:pid",passportCall("jwt"),authorization(["admin"]), deleteProduct)
+router.delete("/:pid",passportCall("jwt"),authorization(["admin","premium"]), deleteProduct)
 
 
 module.exports = router

@@ -4,6 +4,7 @@ const { productService } = require("../services")
 const { CustomError } = require("../utils/CustomError/customError")
 const { generatePoductErrorInfo } = require("../utils/CustomError/info")
 const { EError } = require("../utils/CustomError/EErrors")
+const { sendMail } = require("../utils/sendMail")
 
 const prodManager = productService
 
@@ -26,7 +27,6 @@ class ProductsController{
             let nextLink = "/api/products?page="+nextPage
             let prevLink ="/api/products?page="+prevPage
             let session = request.user
-            console.log(session)
             
             if(!esNumero){
                 limit=2  //si no ingresa un limite valido lo dejo en 10 que es el por defecto
@@ -81,7 +81,6 @@ class ProductsController{
 
  postProduct =async (req,res,next)=>{    //
     try{
-        console.log("error")
         let ValueOwner = req.user.email
         let newProduct = await req.body
         newProduct.owner = !ValueOwner? "admin" : ValueOwner
@@ -100,7 +99,6 @@ class ProductsController{
         res.status(200).send({newProduct})
     }
     catch(error){
-        console.log(error)
         next(error)
     }
 }
@@ -124,7 +122,21 @@ class ProductsController{
   deleteProduct = async(req,res)=>{
      try{
          let {pid} = req.params
-         res.status(200).send(await prodManager.deleteProduct(pid))
+         let result =await prodManager.deleteProduct(pid)
+         
+         if(!req.body){
+            req.logger.warning("no envio un body")
+            res.status(200).send(result)
+         }
+         else{
+            sendMail(req.body.owner,"Un producto de su propiedad fue eliminado",`
+                <div>
+                    <h1>hola</h1>
+                    <p>Su producto con id: ${req.body.objetoId} fue eliminado</a>
+                </div>
+                `)
+            res.status(200).send(result)
+         }
         }
         catch (error){
             res.status(500).send(error)

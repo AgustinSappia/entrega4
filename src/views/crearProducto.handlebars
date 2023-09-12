@@ -9,6 +9,9 @@
         <button type="submit">enviar</button>
     </form>
 </div>
+<div>
+    <a href="/api/products">Volver al inicio</a>
+</div>
 
 <script>
     document.getElementById('productForm').addEventListener('submit', async (event) => {
@@ -35,6 +38,7 @@
 
             if (response.ok) {
                 const data = await response.json();
+                alert("producto creado con exito")
                 console.log(data); // Respuesta del servidor
             } else {
                 console.log('Error al enviar el formulario, no autorizado');

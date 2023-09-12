@@ -179,3 +179,87 @@ error: undefined
 error: no cuenta con la documentacion
 error: no cuenta con la documentacion
 error: no cuenta con la documentacion
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"null\"","value":"null","valueType":"string"}
+error: undefined {"code":"ERR_HTTP_HEADERS_SENT"}
+error: undefined
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"null\"","value":"null","valueType":"string"}
+error: undefined {"code":"ERR_HTTP_HEADERS_SENT"}
+error: undefined
+error: undefined {"code":"ERR_HTTP_HEADERS_SENT"}
+error: undefined
+error: undefined {"code":"ERR_HTTP_HEADERS_SENT"}
+error: undefined
+error: undefined
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"null\"","value":"null","valueType":"string"}
+error: undefined
+warning: 64f0ddd03e94c9ff04b4cf5b
+error: undefined {"code":"ERR_HTTP_HEADERS_SENT"}
+error: undefined
+warning: [object Object],[object Object],[object Object]
+error: undefined {"code":"ERR_HTTP_HEADERS_SENT"}
+error: undefined
+error: undefined
+warning: [{"product":{"_id":"64c18c3fd36d08ec3d2a546a","title":"a","description":"a","price":12,"thumbnail":"asdasd","code":"5553","stock":12342345,"status":true,"owner":"qwe","__v":0},"cantidad":7,"_id":"64f0ddd83e94c9ff04b4cf65"},{"product":{"_id":"64d42b43f714a4b2cb0b07a1","title":"prueba","description":"prueba","price":25,"thumbnail":"asdasd","code":"prueba123","stock":32,"status":true,"owner":"prueba@gmail.com","__v":0},"cantidad":1,"_id":"64f0ddf43e94c9ff04b4cf86"},{"product":{"_id":"64d42af4a30371a8328f4b09","title":"Patitas","description":"Perro","price":25,"thumbnail":"asdasd","code":"prueba12","stock":32,"status":true,"owner":"prueba@gmail.com","__v":0},"cantidad":1,"_id":"64f0ddf43e94c9ff04b4cf8d"}]
+error: undefined {"code":"ERR_HTTP_HEADERS_SENT"}
+error: undefined
+warning: [{"product":{"_id":"64c18c3fd36d08ec3d2a546a","title":"a","description":"a","price":12,"thumbnail":"asdasd","code":"5553","stock":12342345,"status":true,"owner":"qwe","__v":0},"cantidad":7,"_id":"64f0ddd83e94c9ff04b4cf65"},{"product":{"_id":"64d42b43f714a4b2cb0b07a1","title":"prueba","description":"prueba","price":25,"thumbnail":"asdasd","code":"prueba123","stock":32,"status":true,"owner":"prueba@gmail.com","__v":0},"cantidad":1,"_id":"64f0ddf43e94c9ff04b4cf86"},{"product":{"_id":"64d42af4a30371a8328f4b09","title":"Patitas","description":"Perro","price":25,"thumbnail":"asdasd","code":"prueba12","stock":32,"status":true,"owner":"prueba@gmail.com","__v":0},"cantidad":1,"_id":"64f0ddf43e94c9ff04b4cf8d"}]
+warning: [{"product":{"_id":"64c18c3fd36d08ec3d2a546a","title":"a","description":"a","price":12,"thumbnail":"asdasd","code":"5553","stock":12342345,"status":true,"owner":"qwe","__v":0},"cantidad":7,"_id":"64f0ddd83e94c9ff04b4cf65"},{"product":{"_id":"64d42b43f714a4b2cb0b07a1","title":"prueba","description":"prueba","price":25,"thumbnail":"asdasd","code":"prueba123","stock":32,"status":true,"owner":"prueba@gmail.com","__v":0},"cantidad":1,"_id":"64f0ddf43e94c9ff04b4cf86"},{"product":{"_id":"64d42af4a30371a8328f4b09","title":"Patitas","description":"Perro","price":25,"thumbnail":"asdasd","code":"prueba12","stock":32,"status":true,"owner":"prueba@gmail.com","__v":0},"cantidad":1,"_id":"64f0ddf43e94c9ff04b4cf8d"}]
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"null\"","value":"null","valueType":"string"}
+warning: []
+error: undefined
+error: undefined
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"64c025c6c8ce256bf5824c4\"","value":"64c025c6c8ce256bf5824c4","valueType":"string"}
+error: undefined
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"64c025c6c8ce256bf5824c4\"","value":"64c025c6c8ce256bf5824c4","valueType":"string"}
+error: undefined
+error: undefined
+error: undefined
+error: [object Object]
+error: undefined
+error: [object Object]
+error: undefined
+error: undefined
+error: undefined
+error: undefined {"code":"ERR_HTTP_HEADERS_SENT"}
+error: undefined
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"64c025c6c8ce256bf5824c4\"","value":"64c025c6c8ce256bf5824c4","valueType":"string"}
+error: undefined
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"64c025c6c8ce256bf5824c4\"","value":"64c025c6c8ce256bf5824c4","valueType":"string"}
+error: undefined
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"64c025c6c8ce256bf5824c4\"","value":"64c025c6c8ce256bf5824c4","valueType":"string"}
+error: undefined
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"64c025c6c8ce256bf5824c4\"","value":"64c025c6c8ce256bf5824c4","valueType":"string"}
+error: undefined
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"64c025c6c8ce256bf5824c4\"","value":"64c025c6c8ce256bf5824c4","valueType":"string"}
+error: undefined
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"64c025c6c8ce256bf5824c4\"","value":"64c025c6c8ce256bf5824c4","valueType":"string"}
+error: undefined
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"64c025c6c8ce256bf5824c4\"","value":"64c025c6c8ce256bf5824c4","valueType":"string"}
+error: undefined
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"64c025c6c8ce256bf5824c4\"","value":"64c025c6c8ce256bf5824c4","valueType":"string"}
+error: undefined
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"64c025c6c8ce256bf5824c4\"","value":"64c025c6c8ce256bf5824c4","valueType":"string"}
+error: undefined
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"64c025c6c8ce256bf5824c4\"","value":"64c025c6c8ce256bf5824c4","valueType":"string"}
+error: undefined
+error: undefined {"cause":"One or more properties ware incomplete or not valid.\n        listado de requirimientos de propiedades del user:\n        * first_name: needs to a String, received vale\n        * last_name: needs to a String, received \n        * email: needs to a String, received ","code":2,"name":"User creation error"}
+error: One or more properties ware incomplete or not valid.
+        listado de requirimientos de propiedades del user:
+        * first_name: needs to a String, received vale
+        * last_name: needs to a String, received 
+        * email: needs to a String, received 
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"null\"","value":"null","valueType":"string"}
+warning: [{"product":{"_id":"64c18c3fd36d08ec3d2a546a","title":"a","description":"a","price":12,"thumbnail":"asdasd","code":"5553","stock":12342338,"status":true,"owner":"qwe","__v":0},"cantidad":2,"_id":"64ff22dc8fb93590d4e3ba19"},{"product":{"_id":"64d42b43f714a4b2cb0b07a1","title":"prueba","description":"prueba","price":25,"thumbnail":"asdasd","code":"prueba123","stock":31,"status":true,"owner":"prueba@gmail.com","__v":0},"cantidad":2,"_id":"64ff22dd8fb93590d4e3ba1f"},{"product":{"_id":"64d42af4a30371a8328f4b09","title":"Patitas","description":"Perro","price":25,"thumbnail":"asdasd","code":"prueba12","stock":31,"status":true,"owner":"prueba@gmail.com","__v":0},"cantidad":2,"_id":"64ff22de8fb93590d4e3ba26"}]
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined

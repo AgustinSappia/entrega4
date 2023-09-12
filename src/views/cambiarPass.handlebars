@@ -26,17 +26,14 @@
                 .then(response => response.json())
                 .then(data =>{ 
                     if(!data.error){
-                    console.log(data)
                     alert("password changed")
                     window.location.href=`/`
                     }
                     else{
                         if(data.error === "same password"){
-                            console.log(data)
                             alert("no puede poner el mismo pass que ya poseeia")
                         }
                         else{
-                            console.log(data)
                             alert("exiprado!, intenta de nuevo")
                             window.location.href=`/recuperarpass`
                         }

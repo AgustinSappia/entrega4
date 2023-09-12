@@ -1,17 +1,19 @@
-const {Router, json} = require("express")
-const { userModel } = require("../dao/models/user.model")
+const {Router} = require("express")
 const userController = require("../controllers/user.controller")
 const { multerUpload } = require("../config/multerConfig")
 const { passportCall } = require("../passport-jwt/passportCall")
+const { authorization } = require("../passport-jwt/authorizationJwtRole")
+
+
 
 
 const router = Router()
 
-router.get("/",userController.userGet)
+router.get("/",passportCall("jwt"),authorization(["admin"]),userController.userGet)
 
 router.get("/premium/:uid", userController.renderPremium)
 
-router.post("/premium/:uid", userController.premiumAndUser)
+router.post("/premium/:uid",passportCall("jwt"), userController.premiumAndUser)
 
 router.post("/:uid/documents",multerUpload.fields([
     {name:"profileImage", maxCount: 1},
@@ -19,12 +21,18 @@ router.post("/:uid/documents",multerUpload.fields([
     {name:"document", maxCount: 3}
 ]),userController.postDocuments )
 
-router.get("/documents",passportCall("jwt"),async(req,res)=>{
+router.get("/documents",passportCall("jwt"),userController.renderDocuments)
 
-    let user =await userModel.findOne({email:req.user.email})
-    console.log(user)
-    res.render("documentUpload",user)
-})
+
+router.delete('/delete',passportCall("jwt"),authorization(["admin"]) ,userController.deleteExpiredUser)
+
+router.get("/admin",passportCall("jwt"),authorization(["admin"]), userController.adminGet)
+
+router.delete("/deleteOne/:uid",passportCall("jwt"),authorization(["admin"]) , userController.deleteOne)
+
+router.put("/changeRol",passportCall("jwt"),authorization(["admin"]), userController.changeRol)
+  
+//Tue Aug 22 2023 18:24:10 GMT-0300 (hora estándar de Argentina) data para testear
 
 
 

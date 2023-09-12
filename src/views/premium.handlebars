@@ -2,7 +2,8 @@
 
 <button onclick="changeRol('{{uid}}', 'true')">cambiar a premium</button>
 <button onclick="changeRol('{{uid}}', 'false')">cambiar a user</button>
-
+<h3>necesitas volver a ingresar sesion despues de hacer un cambio</h3>
+<a href="/">Logout</a>
 <script>
 async function changeRol(uid, value) {
   try {
@@ -18,13 +19,14 @@ async function changeRol(uid, value) {
     const response = await fetch(url, options);
     const data = await response.json();
     if(data.status=="error"){
-        console.log({error:"el usuario no existe"})
+        alert("el usuario no existe")
     }
     else{
-        console.log(data)
+      console.log(data)
+        alert(JSON.stringify(data))
     }
   } catch (error) {
-    console.error("Error:", error);
+    console.log("Error:" + error);
   }
 }
 </script>

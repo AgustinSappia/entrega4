@@ -1,0 +1,83 @@
+<h1>
+    consola de admin
+</h1>
+<hr>
+{{#each users}}
+<div>
+    <ul>
+        <li>
+             {{this.first_name}} {{this.last_name}}
+        </li>
+        <li>
+            {{this._id}}
+        </li>
+        <li>
+            {{this.rol}}
+        </li>
+    </ul>
+    <button data-id="{{this._id}}" data-class= "botonDelete">eliminar Usuario</button>
+    <button data-id="{{this._id}}" data-Rol="user" class= "botonRol">Cambiar a user</button>
+    <button data-id="{{this._id}}" data-Rol="premium" class= "botonRol">Cambiar a premium</button>
+    <button data-id="{{this._id}}" data-Rol="admin" class= "botonRol">Cambiar a admin</button>
+</div>
+<hr>
+{{/each}}
+
+
+
+<script>
+     let botonesDelete = document.querySelectorAll(`[data-class= "botonDelete"]`)
+     let botonesRol = document.getElementsByClassName("botonRol")
+
+
+    for(let i = 0; i < botonesDelete.length; i++){        
+         botonesDelete[i].addEventListener("click",function(){
+            let userId = this.getAttribute("data-id")
+            eliminarUser(userId)
+                })
+        }
+    for(let i = 0; i<botonesRol.length; i++){
+        botonesRol[i].addEventListener("click",function(){
+            let userId = this.getAttribute("data-id")
+            let userRol = this.getAttribute("data-Rol")
+            cambiarRol(userId,userRol)
+        })
+    }
+        
+
+
+function eliminarUser(userId){
+    fetch(`/api/user/deleteOne/${userId}`,{
+        method:"DELETE",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({userId: userId})
+    })
+    .then(function(response){
+        alert("Usuario eliminado")
+        console.log(response)
+    })
+    .catch(function(error){
+        console.error("Error:", error)
+    })
+}
+
+
+function cambiarRol(userId,userRol){
+    fetch(`/api/user/changeRol`,{
+        method:"PUT",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({userId: userId,userRol:userRol})
+    })
+    .then(function(response){
+        alert("Rol cambiado")
+        console.log(response)
+    })
+    .catch(function(error){
+        console.error("Error:", error)
+    })
+}
+</script>

@@ -180,7 +180,7 @@ class SessionController{
 
            }                
         } catch (error) {
-          console.log(error)
+          logger.error(error)
         }
     }
 
@@ -189,8 +189,7 @@ class SessionController{
         try{
 
             let usuario = req.user
-            usuario.lastConection = new Date()
-            await userModel.updateOne({email:usuario.email},usuario)
+            await userModel.updateOne({email:usuario.email},{lastConection:new Date()})
             logger.info("usuario Desconectado")
             res.clearCookie("tokenCookie").redirect("/")
     
@@ -198,7 +197,7 @@ class SessionController{
     
         }
         catch(error){
-            console.log(error)
+            logger.error(error)
             res.send(error)
         }
     }

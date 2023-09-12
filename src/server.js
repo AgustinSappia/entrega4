@@ -27,8 +27,8 @@ let app = express()
 const serverHttp = serverHTTP(app)
 const socketServer = new ServerIO(serverHttp)
 
-
-
+//cors
+const cors = require("cors")
 //swagger 
 
 const swaggerJsDoc = require("swagger-jsdoc")
@@ -65,6 +65,7 @@ app.use(express.static(__dirname+"/public"))
 //cookieParser
 app.use(cookieParser(process.env.COOKIE_PARSE_CODE))
 //_________________________________________________________________________________________
+app.use(cors())
 //passport
 // const { initPassport, initPassportGithub } = require("./config/passport.config")
 const passport = require("passport")

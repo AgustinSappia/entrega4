@@ -18,10 +18,11 @@ const transport = nodemailer.createTransport({
 exports.sendMail = async(to,subject,html)=>{
 
     return await transport.sendMail({ 
-        from:"coder Test",
+        from:"Server",
         to:to,
         subject:subject,
         html: html,
         attachments:[]
     })
 } 
+

@@ -13,6 +13,7 @@
             {{else}}
             <h1>no ingreso usuario</h1>
         {{/if}}
+        <hr>
         {{#each payload}}
             <li>
                 <strong>Nombre: </strong>{{this.title}}-
@@ -122,11 +123,26 @@ document.addEventListener("DOMContentLoaded",function(){
         for(let i = 0; i < botonesDelete.length; i++){        //maneja los botones del rol premium
             if(botonesDelete[i].getAttribute("data-owner") == userMail){
                 botonesDelete[i].style.display="block"
+                botonesDelete[i].addEventListener("click",function(){
+                    let objetoId = this.getAttribute("data-id")
+                    eliminarObjeto(objetoId,userMail)
+                })
             }
-
         }
+        
     }
 
+    if (userRol==="admin"){
+        for(let i = 0; i < botonesDelete.length; i++){        //maneja los botones del rol premium
+             botonesDelete[i].addEventListener("click",function(){
+                let objetoId = this.getAttribute("data-id")
+                console.log(userMail)
+                console.log(objetoId)
+                eliminarObjeto(objetoId,userMail)
+                })
+            
+        }
+    }
 
 })
 
@@ -146,5 +162,23 @@ function enviarAlCarrito(objetoId,CID){
         console.error("Error:", error)
     })
 }
+
+function eliminarObjeto(objetoId,owner){
+    fetch(`/api/products/${objetoId}`,{
+        method:"DELETE",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({objetoId: objetoId,owner: owner})
+    })
+    .then(function(response){
+        alert("objeto eliminado")
+        console.log(response)
+    })
+    .catch(function(error){
+        console.error("Error:", error)
+    })
+}
+
 
 </script>
